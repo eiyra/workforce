@@ -15,6 +15,7 @@ $fingerEmpAssign = $_POST["fingerEmpAssign"];
 // $sql = "SELECT * FROM fw";
 // $query = mysqli_query($con, $sql);
 // $result = mysqli_fetch_array($query,MYSQLI_ASSOC);
+//cool
 
 	
 {
