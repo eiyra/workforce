@@ -198,7 +198,7 @@ include "empHeader.php";
 									}
 								} else {
 									echo "<tr>";
-									echo "<td colspan='5'>No Result</td>";
+									echo "<td>No Result</td>";
 									echo "</tr>";
 								}
 								mysqli_close($con);
@@ -274,7 +274,7 @@ include "empHeader.php";
 									}
 								} else {
 									echo "<tr>";
-									echo "<td colspan='5'>No Result</td>";
+									echo "<td>No Result</td>";
 									echo "</tr>";
 								}
 								mysqli_close($con);
@@ -342,7 +342,7 @@ include "empHeader.php";
 									}
 								} else {
 									echo "<tr>";
-									echo "<td colspan='5'>No Result</td>";
+									echo "<td>No Result</td>";
 									echo "</tr>";
 								}
 								mysqli_close($con);
@@ -410,7 +410,7 @@ include "empHeader.php";
 									}
 								} else {
 									echo "<tr>";
-									echo "<td colspan='5'>No Result</td>";
+									echo "<td>No Result</td>";
 									echo "</tr>";
 								}
 								mysqli_close($con);
@@ -483,7 +483,7 @@ include "empHeader.php";
 									}
 								} else {
 									echo "<tr>";
-									echo "<td colspan='5'>No Result</td>";
+									echo "<td>No Result</td>";
 									echo "</tr>";
 								}
 								mysqli_close($con);
@@ -559,7 +559,7 @@ include "empHeader.php";
 									}
 								} else {
 									echo "<tr>";
-									echo "<td colspan='5'>No Result</td>";
+									echo "<td>No Result</td>";
 									echo "</tr>";
 								}
 								mysqli_close($con);
