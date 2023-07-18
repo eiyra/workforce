@@ -11,7 +11,7 @@ $admin_address = $_POST["admin_address"];
 $admin_gender = $_POST["admin_gender"];
 $admin_phone_no = $_POST["admin_phone_no"];
 
-
+//testingg
 
 $sql = "SELECT * FROM admin WHERE admin_ic='".$admin_ic."' ";
 $query = mysqli_query($con, $sql);
