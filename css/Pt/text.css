@@ -1,0 +1,122 @@
+/**
+ *    Real-World CSS
+ *    by @visualidiot. Licensed under WTPFL.
+ */
+ 
+/* @group Blink */
+
+.blink {
+    -webkit-animation: blink .99s linear infinite;
+    -moz-animation: blink .99s linear infinite;
+    -ms-animation: blink .99s linear infinite;
+    -o-animation: blink .99s linear infinite;
+    animation: blink .99s linear infinite;
+}
+
+@-webkit-keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 1; }
+    50.01% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@-moz-keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 1; }
+    50.01% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@-ms-keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 1; }
+    50.01% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@-o-keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 1; }
+    50.01% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 1; }
+    50.01% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+/* @end */
+
+.wobble {
+    position: relative;
+    display: inline-block;
+}
+    .wobble {
+        -webkit-animation: wobble .75s linear infinite;
+        -moz-animation: wobble .75s linear infinite;
+        -ms-animation: wobble .75s linear infinite;
+        -o-animation: wobble .75s linear infinite;
+        animation: wobble .75s linear infinite;
+    }
+    
+@-webkit-keyframes wobble {
+    0% { -webkit-transform: rotate(-2deg); }
+    20% { -webkit-transform: rotate(4deg); }
+    30% { -webkit-transform: rotate(1deg); }
+    40% { -webkit-transform: rotate(3deg); }
+    55% { -webkit-transform: rotate(0deg); }
+    70% { -webkit-transform: rotate(-4deg); }
+    80% { -webkit-transform: rotate(2deg); }
+    90% { -webkit-transform: rotate(-2deg); }
+    90% { -webkit-transform: rotate(3deg); }
+}
+@-moz-keyframes wobble {
+    0% { -moz-transform: rotate(-2deg); }
+    20% { -moz-transform: rotate(4deg); }
+    30% { -moz-transform: rotate(1deg); }
+    40% { -moz-transform: rotate(3deg); }
+    55% { -moz-transform: rotate(0deg); }
+    70% { -moz-transform: rotate(-4deg); }
+    80% { -moz-transform: rotate(2deg); }
+    90% { -moz-transform: rotate(-2deg); }
+    90% { -moz-transform: rotate(3deg); }
+}
+@-ms-keyframes wobble {
+    0% { -ms-transform: rotate(-2deg); }
+    20% { -ms-transform: rotate(4deg); }
+    30% { -ms-transform: rotate(1deg); }
+    40% { -ms-transform: rotate(3deg); }
+    55% { -ms-transform: rotate(0deg); }
+    70% { -ms-transform: rotate(-4deg); }
+    80% { -ms-transform: rotate(2deg); }
+    90% { -ms-transform: rotate(-2deg); }
+    90% { -ms-transform: rotate(3deg); }
+}
+@-o-keyframes wobble {
+    0% { -o-transform: rotate(-2deg); }
+    20% { -o-transform: rotate(4deg); }
+    30% { -o-transform: rotate(1deg); }
+    40% { -o-transform: rotate(3deg); }
+    55% { -o-transform: rotate(0deg); }
+    70% { -o-transform: rotate(-4deg); }
+    80% { -o-transform: rotate(2deg); }
+    90% { -o-transform: rotate(-2deg); }
+    90% { -o-transform: rotate(3deg); }
+}
+@keyframes wobble {
+    0% { transform: rotate(-2deg); }
+    20% { transform: rotate(4deg); }
+    30% { transform: rotate(1deg); }
+    40% { transform: rotate(3deg); }
+    55% { transform: rotate(0deg); }
+    70% { transform: rotate(-4deg); }
+    80% { transform: rotate(2deg); }
+    90% { transform: rotate(-2deg); }
+    90% { transform: rotate(3deg); }
+}
+
+
+

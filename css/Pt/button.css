@@ -1,0 +1,18 @@
+@charset "utf-8";
+/* CSS Document */
+input[type=submit],input[type=button],input[type=reset] {
+    width: 15%;
+    background-color: #009999;
+    color: white;
+    padding: 4px 2px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+	font-size:14px;
+}
+
+input[type=submit]:hover,input[type=button]:hover,input[type=reset]:hover {
+    background-color: #00b3b3;
+	
+}

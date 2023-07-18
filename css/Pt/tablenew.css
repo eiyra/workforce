@@ -1,0 +1,18 @@
+
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+	font-family: Trebuchet MS, Arial, Helvetica, sans-serif;
+	text-align:left;
+	
+	}
+
+th, td {
+    padding: 8px;
+}
+h2
+{
+	color:#FFF;
+}
+
