@@ -15,6 +15,21 @@ if (isset($_POST['submit'])) {
     $passTakenDate = $_POST['passTakenDate'];
     $passNote = $_POST['passNote'];
 
+    // Fetch the existing data from the database
+    $selectSql = "SELECT passFile FROM passport WHERE passNo = ?";
+    $selectStmt = mysqli_prepare($con, $selectSql);
+    mysqli_stmt_bind_param($selectStmt, "s", $passNo);
+    mysqli_stmt_execute($selectStmt);
+    mysqli_stmt_bind_result($selectStmt, $passFile);
+
+    if (mysqli_stmt_fetch($selectStmt)) {
+        $filePath = $passFile;
+    } else {
+        $filePath = ""; // Set the default value if no data is found
+    }
+
+    mysqli_stmt_close($selectStmt);
+
     // File upload handling
     if (isset($_FILES['pdf_file']['name']) && $_FILES['pdf_file']['name'] !== '') {
         $file_name = $_FILES['pdf_file']['name'];
@@ -44,6 +59,7 @@ if (isset($_POST['submit'])) {
     } else {
         // File was not uploaded
         $file_name = ""; // Set the filename to an empty string if no file was uploaded
+        $target_file = $filePath; // Use the existing file path if no new file is uploaded
     }
 
     // Prepare the SQL query to insert or update the data
@@ -69,7 +85,7 @@ if (isset($_POST['submit'])) {
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
-    echo "<script>window.alert('Successful Upload!'); window.location.href='empUpdatePass.php?passNo=" . $passNo . "';</script>";
+    echo "<script>window.alert('Successfully Updated!'); window.location.href='empUpdatePass.php?passNo=" . $passNo . "';</script>";
 
 }
 
