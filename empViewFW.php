@@ -177,19 +177,23 @@ include "empHeader.php";
 								if (mysqli_num_rows($result) > 0) {
 									while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 										$i++;
+
+										$filePath = $row['passFile'];
+										$fileName = basename($filePath);
+
 										echo "<tr>";
 										echo "<td>" . $i . "</td>";
 										echo "<td>" . $row["passNo"] . "</td>";
 										echo "<td>" . $row["passIssuedDate"] . "</td>";
 										echo "<td>" . $row["passExpDate"] . "</td>";
 										echo "<td>" . $row["passTakenDate"] . "</td>";
-										echo "<td>" . $row["passFile"] . "</td>";
+										echo "<td>" . $fileName . "</td>";
 										echo "<td>" . $row["passNote"] . "</td>";
 										echo "<td>
-                                                                <a href='empUpdatePass.php?passNo=" . $row["passNo"] . "' ><center><button type='button' class='btn btn-warning'>Update</button></center></a>  
-																<br><br>
-                                                                <a href='deletePass.php?passNo=" . $row["passNo"] . "' ><center><button type='button' onclick='return checkDelete()' class='btn btn-danger pull-right'>Delete</button></center></a>
-																		</td>";
+												<a href='empUpdatePass.php?passNo=" . $row["passNo"] . "' ><center><button type='button' class='btn btn-warning'>Update</button></center></a>  
+												<br><br>
+												<a href='deletePass.php?passNo=" . $row["passNo"] . "' ><center><button type='button' onclick='return checkDelete()' class='btn btn-danger pull-right'>Delete</button></center></a>
+											</td>";
 										echo "</tr>";
 									}
 								} else {
