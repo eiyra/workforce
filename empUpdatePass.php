@@ -82,18 +82,17 @@ include "empHeader.php";
 
 				<div class="form-group">
 					<label for="passFile">Passport File:</label>
+					<?php
+					$filePath = $objResult1['passFile'];
+					$fileName = basename($filePath);
+					?>
 					<input type="text" class="form-control" name="namaFile" id="namaFile" accept=".pdf"
-						value="<?php echo $objResult1['passFile']; ?>" readonly><br>
+						value="<?php echo $fileName; ?>" readonly>
+					<a href="<?php echo $filePath; ?>" target="_blank" rel="noopener noreferrer">View PDF</a>
 
-					<!-- Combine the file input into the existing form -->
 					<input type="file" name="pdf_file" id="pdf_file" accept=".pdf">
 				</div>
-
-				<!-- <div class="form-group">
-					<input type="file" class="form-control" name="passFile" id="passFile" accept=".pdf">
-					<input type="hidden" name="MAX_FILE_SIZE" value="100000">
-				</div> -->
-
+			
 				<div class="form-group">
 					<label for="inputName">Note :</label>
 					<input name="passNote" id="passNote" class="form-control" type="text"
