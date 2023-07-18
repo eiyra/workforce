@@ -89,8 +89,8 @@ include "empHeader.php";
 					<input type="text" class="form-control" name="namaFile" id="namaFile" accept=".pdf"
 						value="<?php echo $fileName; ?>" readonly>
 					<a href="<?php echo $filePath; ?>" target="_blank" rel="noopener noreferrer">View PDF</a>
-
-					<input type="file" name="pdf_file" id="pdf_file" accept=".pdf">
+				
+					<input class="mt-3" type="file" name="pdf_file" id="pdf_file" accept=".pdf">
 				</div>
 			
 				<div class="form-group">
