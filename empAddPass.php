@@ -61,29 +61,35 @@ include "empHeader.php";
 
 				<div class="form-group">
 					<label for="lblDate">Passport Issued Date:</label>
-					<input type="date" data-date-inline-picker="true" value="dd/mm/yyyy" class="form-control"
-						id="passIssuedDate" name="passIssuedDate" placeholder="dd/mm/yyyy"
-						value="<?= date('Y-m-d', time()); ?>" required>
+					<input type="date" data-date-inline-picker="true" class="form-control"
+						value="<?php echo $objResult1['passIssuedDate']; ?>" id="passIssuedDate" name="passIssuedDate"
+						required>
 				</div>
 
 				<div class="form-group">
 					<label for="lblDate">Passport Expiry Date:</label>
-					<input type="date" data-date-inline-picker="true" value="dd/mm/yyyy" class="form-control"
-						id="passExpDate" name="passExpDate" placeholder="dd/mm/yyyy"
-						value="<?= date('Y-m-d', time()); ?>" required>
+					<input type="date" data-date-inline-picker="true" class="form-control"
+						value="<?php echo $objResult1['passExpDate']; ?>" id="passExpDate" name="passExpDate" required>
 				</div>
 
 				<div class="form-group">
 					<label for="lblDate">Passport Taken Date:</label>
-					<input type="date" data-date-inline-picker="true" value="dd/mm/yyyy" class="form-control"
-						id="passTakenDate" name="passTakenDate" placeholder="dd/mm/yyyy" required>
+					<input type="date" data-date-inline-picker="true" class="form-control"
+						value="<?php echo $objResult1['passTakenDate']; ?>" id="passTakenDate" name="passTakenDate"
+						required>
 				</div>
 
 				<div class="form-group">
 					<label for="passFile">Passport File:</label>
-					<input type="file" class="form-control" name="passFile" id="passFile" accept=".pdf" placeholder=""
-						required>
-					<input type="hidden" name="MAX_FILE_SIZE" value="100000">
+					<?php
+					$filePath = $objResult1['passFile'];
+					$fileName = basename($filePath);
+					?>
+					<input type="text" class="form-control" name="namaFile" id="namaFile" accept=".pdf"
+						value="<?php echo $fileName; ?>" readonly>
+					<a href="<?php echo $filePath; ?>" target="_blank" rel="noopener noreferrer">View PDF</a>
+
+					<input class="mt-3" type="file" name="pdf_file" id="pdf_file" accept=".pdf">
 				</div>
 
 				<div class="form-group">
@@ -101,13 +107,6 @@ include "empHeader.php";
 						<br>
 						<button name="submit" type="submit" class="btn btn-success">Submit</button>
 						<button id="myButton" onclick="history.go(-1);" class="btn btn-warning">Cancel</button>
-
-						<!-- <script type="text/javascript">
-											document.getElementById("myButton").onclick = function () {
-												location.href = "empDashboard.php";
-											};
-												 </script> -->
-
 					</div>
 				</div>
 
@@ -133,15 +132,10 @@ include "empHeader.php";
 <!--//scrolling js-->
 
 <script>
-	$(function () {
-		var today = new Date(); // Get today's date
-		$("#passTakenDate").datepicker({
-			minDate: today, // Set minimum date to today
-			beforeShowDay: function (date) {
-				return [date >= today, '']; // Disable selecting previous dates
-			}
-		});
-	});
+	var today = new Date().toISOString().split('T')[0];
+	document.getElementById("passIssuedDate").setAttribute('min', today);
+	document.getElementById("passExpDate").setAttribute('min', today);
+	document.getElementById("passTakenDate").setAttribute('min', today);
 </script>
 
 

@@ -70,14 +70,13 @@ include "empHeader.php";
 				<div class="form-group">
 					<label for="lblDate">Passport Expiry Date:</label>
 					<input type="date" data-date-inline-picker="true" class="form-control"
-						value="<?php echo $objResult1['passExpDate']; ?>" id="passExpDate" name="passExpDate"
-						required>
+						value="<?php echo $objResult1['passExpDate']; ?>" id="passExpDate" name="passExpDate" required>
 				</div>
 
 				<div class="form-group">
 					<label for="lblDate">Passport Taken Date:</label>
 					<input type="date" data-date-inline-picker="true" class="form-control"
-						value="<?php echo $objResult1['passTakenDate']; ?>" id="passTakenDate" name="passTakenDate" 
+						value="<?php echo $objResult1['passTakenDate']; ?>" id="passTakenDate" name="passTakenDate"
 						required>
 				</div>
 
@@ -110,13 +109,6 @@ include "empHeader.php";
 					<div class="col-sm-12">
 						<br>
 						<button name="submit" type="submit" class="btn btn-success">Update</button>
-						<!-- <button id="myButton" onclick="" class="btn btn-warning">Cancel</button>
-										
-										<script type="text/javascript">
-											document.getElementById("myButton").onclick = function () {
-												location.href = "empFWList.php";
-											};
-										</script>  -->
 					</div>
 				</div>
 
@@ -142,10 +134,10 @@ include "empHeader.php";
 <!--//scrolling js-->
 
 <script>
-    var today = new Date().toISOString().split('T')[0];
-    document.getElementById("passIssuedDate").setAttribute('min', today);
-    document.getElementById("passExpDate").setAttribute('min', today);
-    document.getElementById("passTakenDate").setAttribute('min', today);
+	var today = new Date().toISOString().split('T')[0];
+	document.getElementById("passIssuedDate").setAttribute('min', today);
+	document.getElementById("passExpDate").setAttribute('min', today);
+	document.getElementById("passTakenDate").setAttribute('min', today);
 </script>
 
 <?php
