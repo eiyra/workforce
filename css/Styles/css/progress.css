@@ -1,0 +1,21 @@
+.progress {
+  height: 30px;
+
+}
+.progress .skill {
+  font: normal 15px "Open Sans Web";
+  line-height: 15px;
+  padding: 0;
+  margin: 0 0 0 15px;
+  text-transform: uppercase;
+}
+.progress .skill .val {
+  float: right;
+  font-style: normal;
+  margin: 0 15px 0 0;
+}
+
+.progress-bar {
+  text-align: center;
+  transition-duration: 10s;
+}
