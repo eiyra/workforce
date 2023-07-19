@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
 
 		// Check if the file already exists
 		if (file_exists($target_file)) {
-			echo "<script>window.alert('A file with that name already exists!');</script>";
+			echo "<script>window.alert('A file with that name already exists!');window.location.href='empFWList.php'</script>";
 			exit();
 		}
 
@@ -47,13 +47,13 @@ if (isset($_POST['submit'])) {
 			mysqli_stmt_execute($stmt);
 			mysqli_stmt_close($stmt);
 
-			echo "<script>window.alert('Successfully added!')</script>";
+			echo "<script>window.alert('Successfully added!');window.location.href='empFWList.php'</script>";
 		} else {
-			echo "<script>window.alert('Failed to upload the file!')</script>";
+			echo "<script>window.alert('Failed to upload the file!');window.location.href='empFWList.php'</script>";
 			// exit();
 		}
 	} else {
-		echo "<script>window.alert('You must upload a PDF file!')</script>";
+		echo "<script>window.alert('You must upload a PDF file!');window.location.href='empFWList.php'</script>";
 		// exit();
 	}
 }

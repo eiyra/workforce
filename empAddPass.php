@@ -61,35 +61,24 @@ include "empHeader.php";
 
 				<div class="form-group">
 					<label for="lblDate">Passport Issued Date:</label>
-					<input type="date" data-date-inline-picker="true" class="form-control"
-						value="<?php echo $objResult1['passIssuedDate']; ?>" id="passIssuedDate" name="passIssuedDate"
+					<input type="date" data-date-inline-picker="true" class="form-control" id="passIssuedDate" name="passIssuedDate"
 						required>
 				</div>
 
 				<div class="form-group">
 					<label for="lblDate">Passport Expiry Date:</label>
-					<input type="date" data-date-inline-picker="true" class="form-control"
-						value="<?php echo $objResult1['passExpDate']; ?>" id="passExpDate" name="passExpDate" required>
+					<input type="date" data-date-inline-picker="true" class="form-control" id="passExpDate" name="passExpDate" required>
 				</div>
 
 				<div class="form-group">
 					<label for="lblDate">Passport Taken Date:</label>
-					<input type="date" data-date-inline-picker="true" class="form-control"
-						value="<?php echo $objResult1['passTakenDate']; ?>" id="passTakenDate" name="passTakenDate"
-						required>
+					<input type="date" data-date-inline-picker="true" class="form-control" id="passTakenDate" name="passTakenDate">
 				</div>
 
 				<div class="form-group">
 					<label for="passFile">Passport File:</label>
-					<?php
-					$filePath = $objResult1['passFile'];
-					$fileName = basename($filePath);
-					?>
-					<input type="text" class="form-control" name="namaFile" id="namaFile" accept=".pdf"
-						value="<?php echo $fileName; ?>" readonly>
-					<a href="<?php echo $filePath; ?>" target="_blank" rel="noopener noreferrer">View PDF</a>
-
-					<input class="mt-3" type="file" name="pdf_file" id="pdf_file" accept=".pdf">
+					<!--<input class="mt-3" type="file" name="pdf_file" id="pdf_file" accept=".pdf"> -->
+					<input type="file" class="mt-3" name="passFile" id="passFile" accept=".pdf" required> 
 				</div>
 
 				<div class="form-group">
