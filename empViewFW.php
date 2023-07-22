@@ -45,15 +45,20 @@ include "empHeader.php";
 					value="<?php echo $objResult1['fw_id']; ?>">
 
 				<div class="form-group">
-					<label for="inputName">Name :</label>
+					<label for="inputName">Name:</label>
 					<input name="fw_name" id="fw_name" class="form-control" type="text"
 						value="<?php echo $objResult1['fw_name']; ?>">
 				</div>
-
+				
 				<div class="form-group">
-					<label for="inputName">Nationality :</label>
-					<input name="fw_nation" id="fw_nation" class="form-control" type="text"
-						value="<?php echo $objResult1['fw_nation']; ?>" readonly>
+				<label for="lblNation">Nationality :</label>
+					<select class="form-control" name="fw_nation" id="fw_nation">
+					<option value="Bangladesh" <?php echo ($objResult1['fw_nation'] === 'Bangladesh') ? 'selected' : ''; ?>>Bangladesh</option>
+					<option value="India" <?php echo ($objResult1['fw_nation'] === 'India') ? 'selected' : ''; ?>>India</option>
+					<option value="Indonesia" <?php echo ($objResult1['fw_nation'] === 'Indonesia') ? 'selected' : ''; ?>>Indonesia</option>
+					<option value="Myanmar" <?php echo ($objResult1['fw_nation'] === 'Myanmar') ? 'selected' : ''; ?>>Myanmar</option>
+					<option value="Pakistan" <?php echo ($objResult1['fw_nation'] === 'Pakistan') ? 'selected' : ''; ?>>Pakistan</option>
+					</select>
 				</div>
 
 				<div class="form-group">
@@ -78,25 +83,33 @@ include "empHeader.php";
 					<input type="text" class="form-control" name="fw_address" id="fw_address"
 						value="<?php echo $objResult1['fw_address']; ?>">
 				</div>
-
-
+				
 				<div class="form-group">
-					<label for="exampleInputEmail1">Gender :</label>
-					<input type="text" class="form-control" name="fw_gender" id="fw_gender"
-						value="<?php echo $objResult1['fw_gender']; ?>" readonly>
+				<label for="lblGender">Gender :</label>
+					<select class="form-control" name="fw_gender" id="fw_gender">
+					<option value="Male" <?php echo ($objResult1['fw_gender'] === 'Male') ? 'selected' : ''; ?>>Male</option>
+					<option value="Female" <?php echo ($objResult1['fw_gender'] === 'Female') ? 'selected' : ''; ?>>Female</option>
+					</select>
+				</div>
+				
+				<div class="form-group">
+				<label for="lblGender">Intake Type :</label>
+					<select class="form-control" name="fw_intake" id="fw_intake">
+					<option value="RTK" <?php echo ($objResult1['fw_intake'] === 'RTK') ? 'selected' : ''; ?>>RTK</option>
+					<option value="CALLING VISA" <?php echo ($objResult1['fw_intake'] === 'CALLING VISA') ? 'selected' : ''; ?>>CALLING VISA</option>
+					</select>
 				</div>
 
+										
 				<div class="form-group">
-					<label for="exampleInputEmail1">Intake Type :</label>
-					<input type="text" class="form-control" name="fw_intake" id="fw_intake"
-						value="<?php echo $objResult1['fw_intake']; ?>" readonly>
+				<label for="lblGender">Agency Registered :</label>
+					<select class="form-control" name="fw_register" id="fw_register">
+					<option value="TQM" <?php echo ($objResult1['fw_register'] === 'TQM') ? 'selected' : ''; ?>>TQM</option>
+					<option value="BUMINUR" <?php echo ($objResult1['fw_register'] === 'BUMINUR') ? 'selected' : ''; ?>>BUMINUR</option>
+					<option value="GOLDENSPEC" <?php echo ($objResult1['fw_register'] === 'GOLDENSPEC') ? 'selected' : ''; ?>>GOLDENSPEC</option>
+					</select>
 				</div>
-
-				<div class="form-group">
-					<label for="exampleInputEmail1">Agency Registered :</label>
-					<input type="text" class="form-control" name="fw_register" id="fw_register"
-						value="<?php echo $objResult1['fw_register']; ?>" readonly>
-				</div>
+										
 
 				<div class="form-group">
 					<label for="exampleInputEmail1">Note :</label>

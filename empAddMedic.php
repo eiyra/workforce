@@ -65,15 +65,6 @@ include "empHeader.php";
 										<input type="date" data-date-inline-picker="true" value="dd/mm/yyyy" class="form-control" id="immDate" name="immDate" placeholder="dd/mm/yyyy" value="<?= date('Y-m-d', time()); ?>" required>
 										</div>
 										
-										<!-- <div class="form-group">
-										<label for="exampleInputEmail1">Medical Status:</label>
-										<div class="radio">
-										<label><input type="radio" name="medicalStatus" id="medicalStatus" value="PASS" required>PASS</label> &nbsp;&nbsp;
-										<label><input type="radio" name="medicalStatus" id="medicalStatus" value="FAIL">FAIL</label> &nbsp;&nbsp;
-										<label><input type="radio" name="medicalStatus" id="medicalStatus" value="MEDICAL TEMBAK">MEDICAL TEMBAK</label>
-										</div>
-										</div> -->
-										
 										<div class="form-group">
 										<label for="lblNation">Medical Status:</label>
 										<select class="form-control" name="medicalStatus" id="medicalStatus" required>

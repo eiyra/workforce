@@ -61,8 +61,7 @@ include "empHeader.php";
 
 				<div class="form-group">
 					<label for="lblDate">Passport Issued Date:</label>
-					<input type="date" data-date-inline-picker="true" class="form-control" id="passIssuedDate" name="passIssuedDate"
-						required>
+					<input type="date" data-date-inline-picker="true" class="form-control" id="passIssuedDate" name="passIssuedDate" required>
 				</div>
 
 				<div class="form-group">
@@ -70,10 +69,10 @@ include "empHeader.php";
 					<input type="date" data-date-inline-picker="true" class="form-control" id="passExpDate" name="passExpDate" required>
 				</div>
 
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<label for="lblDate">Passport Taken Date:</label>
 					<input type="date" data-date-inline-picker="true" class="form-control" id="passTakenDate" name="passTakenDate">
-				</div>
+				</div>   -->
 
 				<div class="form-group">
 					<label for="passFile">Passport File:</label>
@@ -122,9 +121,8 @@ include "empHeader.php";
 
 <script>
 	var today = new Date().toISOString().split('T')[0];
-	document.getElementById("passIssuedDate").setAttribute('min', today);
+	document.getElementById("passIssuedDate").setAttribute('max', today);
 	document.getElementById("passExpDate").setAttribute('min', today);
-	document.getElementById("passTakenDate").setAttribute('min', today);
 </script>
 
 

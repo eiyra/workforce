@@ -1,57 +1,63 @@
 <form name="form1" method="post" action="addPermit.php">
 
-
 <?php
-include ('config.php');
+include('config.php');
 
-	if (isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
+	$fw_id = $_POST['fw_id'];
+	$permitNo = $_POST['permitNo'];
+	$permitIssuedDate = $_POST['permitIssuedDate'];
+	$permitExpDate = $_POST['permitExpDate'];
+	$permitTakenDate = $_POST['permitTakenDate'];
+	$permitStatus = $_POST['permitStatus'];
+	$permitYear = $_POST['permitYear'];
+	$permitEmpAssign = $_POST['permitEmpAssign'];
+	$permitNote = $_POST['permitNote'];
 
-		$fw_id = $_POST['fw_id'];
-		// $fw_name = $_POST['fw_name'];
-		$permitNo = $_POST['permitNo'];
-		$permitIssuedDate = $_POST['permitIssuedDate'];
-		$permitExpDate = $_POST['permitExpDate'];
-		$permitTakenDate = $_POST['permitTakenDate'];
-		$permitStatus = $_POST['permitStatus'];
-		$permitYear = $_POST['permitYear'];
-		$permitEmpAssign = $_POST['permitEmpAssign'];
-		$permitNote = $_POST['permitNote'];
-		
-
-		if (isset($_FILES['permitFile']['name']))
-		{
+	// Check if a file was uploaded
+	if (isset($_FILES['permitFile']['name']) && $_FILES['permitFile']['name'] !== '') {
 		$file_name = $_FILES['permitFile']['name'];
 		$file_tmp = $_FILES['permitFile']['tmp_name'];
+		$file_type = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
 
-		
-		move_uploaded_file($file_tmp,"./doc/permit/".$file_name);
-		
-		$insertquery =
-		"INSERT INTO permit(fw_id,permitNo,permitIssuedDate,permitExpDate,permitTakenDate,permitFile,permitStatus,permitYear,permitEmpAssign,permitNote)
-		VALUES ('$fw_id','$permitNo','$permitIssuedDate','$permitExpDate','$permitTakenDate','$file_name','$permitStatus','$permitYear','$permitEmpAssign','$permitNote')";
-		$iquery = mysqli_query($con, $insertquery);
-		
-			echo "<script>window.alert('Successfully added!');window.location.href='empFWList.php'</script>";
-			exit;
-			
+		// Check if the uploaded file is a PDF
+		if ($file_type !== 'pdf') {
+			echo "<script>window.alert('Failed! File must be uploaded in PDF format!');window.location.href='empAddPermit.php?permitNo=" . $permitNo . "';</script>";
+			exit();
 		}
-		
-		if (file_exists($file_name))
-		{
-			echo "<script>window.alert('A file with that name already exists!');</script>";
-			exit;
+
+		$target_directory = "./doc/permit/";
+		$target_file = $target_directory . basename($file_name);
+
+		// Check if the file already exists
+		if (file_exists($target_file)) {
+			echo "<script>window.alert('A file with that name already existed!');window.location.href='empAddPermit.php?permitNo=" . $permitNo . "';</script>";
+			exit();
 		}
-			
-		
-		else
-		{
-		
-			echo "<script>window.alert('Failed! File must be uploaded in PDF format!');window.location.href='empFWList.php'</script>";
-			exit;
-		
+
+		// Move the uploaded file to the desired directory
+		if (move_uploaded_file($file_tmp, $target_file)) {
+			$insertquery = "INSERT INTO permit(fw_id,permitNo,permitIssuedDate,permitExpDate,permitTakenDate,permitFile,permitStatus,permitYear,permitEmpAssign,permitNote)
+                            VALUES ('$fw_id','$permitNo','$permitIssuedDate','$permitExpDate','$permitTakenDate','$permitFile','$permitStatus','$permitYear','$permitEmpAssign', '$permitNote')";
+
+			// Use prepared statement to prevent SQL injection
+			$stmt = mysqli_prepare($con, $insertquery);
+			if (!$stmt) {
+				echo "Error: " . mysqli_error($con);
+				exit();
+			}
+
+			mysqli_stmt_execute($stmt);
+			mysqli_stmt_close($stmt);
+
+			echo "<script>window.alert('Successfully added!');window.location.href='empFWList.php?permitNo=" . $permitNo . "';</script>";
+		} else {
+			echo "<script>window.alert('Failed to upload the file!');window.location.href='empAddPermit.php?permitNo=" . $permitNo . "';</script>";
+			// exit();
 		}
-		
+	} else {
+		echo "<script>window.alert('You must upload a PDF file!');window.location.href='empAddPermit.php?permitNo=" . $permitNo . "';</script>";
+		// exit();
 	}
-	
-	
+}
 ?>

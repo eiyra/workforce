@@ -35,12 +35,12 @@ $fingerEmpAssign = $_POST["fingerEmpAssign"];
 		if($insert)
 		{
 			echo "<script>alert('Successfully added!');";
-			echo "window.location.href = 'empFWList.php';</script>";
+			echo "window.location.href='empViewFW.php?fw_id=" . $fw_id . "';</script>";
 		}
 		else
 		{
 			echo "<script>alert('Error inserting data!');";
-			echo "window.location.href = 'empFWList.php';</script>";
+			echo "window.location.href = 'empViewFW.php?fw_id=" . $fw_id . "';</script>";
 		}
 }
 mysqli_close($con);

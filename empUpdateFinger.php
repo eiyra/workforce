@@ -66,19 +66,18 @@ include "empHeader.php";
 										<label for="lblNation">Fingerprint Status:</label>
 										<select class="form-control" name="fingerStatus" id="fingerStatus">
 										<option value="">-- Choose Status --</option>
-										<option value="PASS">PASS</option>
-										<option value="FAIL">FAIL</option>
-										<option value="PENDING">PENDING</option>
+										<option value="PASS" <?php echo ($objResult1['fingerStatus'] === 'PASS') ? 'selected' : ''; ?>>PASS</option>
+										<option value="FAIL" <?php echo ($objResult1['fingerStatus'] === 'FAIL') ? 'selected' : ''; ?>>FAIL</option>
+										<option value="PENDING" <?php echo ($objResult1['fingerStatus'] === 'PENDING') ? 'selected' : ''; ?>>PENDING</option>
 										</select>
-										</div>
-										
+										</div>		
 										
 										<div class="form-group">
 										<label for="inputName">Note:</label>
 										<input name="fingerNote" id="fingerNote" class="form-control" type="text" value="<?php echo $objResult1['fingerNote']; ?>">
 										</div>
 										
-										<input name="fingerEmpAssign" id="fingerEmpAssign" class="form-control" type="hidden" value="<?php echo $objResult['fingerEmpAssign']; ?>" readonly>
+										<input name="fingerEmpAssign" id="fingerEmpAssign" class="form-control" type="hidden" value="<?php echo $objResult['emp_name']; ?>">
 									
 									
 										<div class="form-group" align="right">

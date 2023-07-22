@@ -32,7 +32,7 @@ include "empHeader.php";
 					</div>
 
          					<div class="grid-form">
-										<form method="post" name="formAddPass" action="addPassport.php" enctype="multipart/form-data">
+										<form method="post" name="formAddPermit" action="addPermit.php" enctype="multipart/form-data">
 										
 										<?php
 										$strSQL1 = "SELECT * FROM fw WHERE fw_id = '".$_GET['fw_id']."' ";
@@ -59,32 +59,44 @@ include "empHeader.php";
 										
 										<div class="form-group">
 										<label for="lblDate">Permit Issued Date:</label>
-										<input type="date" data-date-inline-picker="true" value="dd/mm/yyyy" class="form-control" id="permitIssuedDate" name="permitIssuedDate" placeholder="dd/mm/yyyy" value="<?= date('Y-m-d', time()); ?>" required>
+										<input type="date" data-date-inline-picker="true" value="dd/mm/yyyy" class="form-control" id="permitIssuedDate" name="permitIssuedDate" placeholder="dd/mm/yyyy" value="<?= date('Y-m-d', time()); ?>">
 										</div>
 										
 										<div class="form-group">
 										<label for="lblDate">Permit Expiry Date:</label>
-										<input type="date" data-date-inline-picker="true" value="dd/mm/yyyy" class="form-control" id="permitExpDate" name="permitExpDate" placeholder="dd/mm/yyyy" value="<?= date('Y-m-d', time()); ?>" required>								
+										<input type="date" data-date-inline-picker="true" value="dd/mm/yyyy" class="form-control" id="permitExpDate" name="permitExpDate" placeholder="dd/mm/yyyy" value="<?= date('Y-m-d', time()); ?>">								
 										</div>
 										
 										<div class="form-group">
 										<label for="lblDate">Permit Taken Date:</label>
-										<input type="date" data-date-inline-picker="true" value="dd/mm/yyyy" class="form-control" id="permitTakenDate" name="permitTakenDate" placeholder="dd/mm/yyyy" value="<?= date('Y-m-d', time()); ?>" required>
+										<input type="date" data-date-inline-picker="true" value="dd/mm/yyyy" class="form-control" id="permitTakenDate" name="permitTakenDate" placeholder="dd/mm/yyyy" value="<?= date('Y-m-d', time()); ?>">
 										</div>
 										
 										<div class="form-group">
 										<label for="passFile">Permit File:</label>
-										<input type="file" class="form-control" name="permitFile" id="permitFile" accept=".pdf" placeholder="">
-										<input type="hidden" name="MAX_FILE_SIZE" value="100000">
+										<!--<input type="file" class="form-control" name="permitFile" id="permitFile" accept=".pdf" placeholder=""> -->
+										<input type="file" class="form-control" name="permitFile" id="permitFile" accept=".pdf" required> 
+										</div>
+																		
+										<div class="form-group">
+										<label for="lblNation">Permit Status:</label>
+										  <select class="form-control" name="permitStatus" id="permitStatus" required>
+										  <option value="">-- Select Status --</option>
+											<option value="PASS">PASS</option>
+											<option value="FAIL">FAIL</option>
+											<option value="PENDING">PENDING</option>
+										  </select>
 										</div>
 										
-										<div class="form-group">
-										<label for="exampleInputEmail1">Permit Status :</label>
-										<div class="radio">
-										<label><input type="radio" name="permitStatus" id="permitStatus" value="PASS">PASS</label> &nbsp;&nbsp;
-										<label><input type="radio" name="permitStatus" id="permitStatus" value="FAIL">FAIL</label>
-										</div>
-										</div>
+											<!-- <div class="form-group">
+										  <label for="lblNation">Permit Status:</label>
+										  <select class="form-control" name="permitStatus" id="permitStatus">
+											<option value="PASS" <?php echo ($objResult1['permitStatus'] === 'PASS') ? 'selected' : ''; ?>>PASS</option>
+											<option value="FAIL" <?php echo ($objResult1['permitStatus'] === 'FAIL') ? 'selected' : ''; ?>>FAIL</option>
+											<option value="PENDING" <?php echo ($objResult1['permitStatus'] === 'PENDING') ? 'selected' : ''; ?>>PENDING</option>
+										  </select>
+										</div>  -->
+										
 										
 										<div class="form-group">
 										<label for="inputName">Permit Year :</label>
@@ -101,7 +113,7 @@ include "empHeader.php";
 										<input name="permitEmpAssign" id="permitEmpAssign" class="form-control" type="text" value="<?php echo $objResult['emp_name']; ?>" readonly>
 										</div>
 									
-										<div class="form-group" align="left">
+										<div class="form-group" align="right">
 										<div class="col-sm-12">
 										<br>
 										<button type="submit" class="btn btn-success">Submit</button>
@@ -137,7 +149,12 @@ include "empHeader.php";
 			<script src="js/scripts.js"></script>
 			<!--//scrolling js-->
 			
-			
+			<script>
+			var today = new Date().toISOString().split('T')[0];
+			document.getElementById("permitIssuedDate").setAttribute('max', today);
+			document.getElementById("permitExpDate").setAttribute('min', today);
+			document.getElementById("permitTakenDate").setAttribute('max', today);
+			</script>
 		
 
 <?php

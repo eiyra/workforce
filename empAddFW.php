@@ -33,22 +33,11 @@ include "empHeader.php";
 
          					<div class="grid-form">
 										<form method="post" name="formAddFW" action="addFW.php">
-										
-										<?php
-										// $strSQL1 = "SELECT * FROM makeupartist WHERE mua_ic = '".$_GET['mua_ic']."' ";
-										// $objQuery1 = mysqli_query($con,$strSQL1);
-										// $objResult1 = mysqli_fetch_array($objQuery1);
-										?>
-					
+															
 										<div class="form-group">
 										<label for="inputName">Name :</label>
 										<input name="fw_name" id="fw_name" class="form-control" type="text" required="required">
 										</div>
-										
-										<!-- <div class="form-group">
-										<label for="inputName">Nationality :</label>
-										<input name="fw_nation" id="fw_nation" class="form-control" type="text" required="required">
-										</div>  -->
 										
 										<div class="form-group">
 										<label for="lblNation">Nationality:</label>
@@ -82,36 +71,34 @@ include "empHeader.php";
 										<input type="text" class="form-control" name="fw_address" id="fw_address" required>
 										</div>
 										
+										<div class="form-group">
+										<label for="lblGender">Gender:</label>
+										<select class="form-control" name="fw_gender" id="fw_gender" required="required">
+										<option value="">-- Select Gender --</option>
+										<option value="Male">Male</option>
+										<option value="Female">Female</option>
+										</select>
+										</div>
 										
 										<div class="form-group">
-										<label for="exampleInputEmail1">Gender :</label>
-										<div class="radio">
-										<label><input type="radio" name="fw_gender" id="fw_gender" value="MALE" required>Male</label> &nbsp;&nbsp;
-										<label><input type="radio" name="fw_gender" id="fw_gender" value="FEMALE">Female</label>
+										<label for="lblIntake">Intake Type:</label>
+										<select class="form-control" name="fw_intake" id="fw_intake" required="required">
+										<option value="">-- Select Intake --</option>
+										<option value="RTK">RTK</option>
+										<option value="CALLING VISA">CALLING VISA</option>
+										</select>
 										</div>
-										</div>
-										
-										<br>
 										
 										<div class="form-group">
-										<label for="exampleInputEmail1">Intake Type :</label>
-										<div class="radio">
-										<label><input type="radio" name="fw_intake" id="fw_intake" value="RTK" required>RTK</label> &nbsp;&nbsp;
-										<label><input type="radio" name="fw_intake" id="fw_intake" value="CALLING VISA">Calling Visa</label>
+										<label for="lblAgency">Agency Registered:</label>
+										<select class="form-control" name="fw_register" id="fw_register" required="required">
+										<option value="">-- Select Agency --</option>
+										<option value="TQM">TQM</option>
+										<option value="BUMINUR">BUMINUR</option>
+										<option value="GOLDENSPEC">GOLDENSPEC</option>
+										</select>
 										</div>
-										</div>
-										
-										<br>
-										
-										<div class="form-group">
-										<label for="exampleInputEmail1">Agency Registered :</label>
-										<div class="radio">
-										<label><input type="radio" name="fw_register" id="fw_register" value="TQM" required>TQM</label> &nbsp;
-										<label><input type="radio" name="fw_register" id="fw_register" value="BUMINUR">Buminur</label> &nbsp;&nbsp;
-										<label><input type="radio" name="fw_register" id="fw_register" value="GOLDENSPEC">Goldenspec</label>
-										</div>
-										</div>
-										
+													
 										<div class="form-group">
 										<label for="exampleInputEmail1">Remarks :</label>
 										<input type="text" class="form-control" name="fw_remarks" id="fw_remarks" required>
@@ -122,7 +109,7 @@ include "empHeader.php";
 										<input name="emp_name" id="emp_name" class="form-control" type="text" value="<?php echo $objResult['emp_name']; ?>" readonly>
 										</div>
 
-										<div class="form-group" align="left">
+										<div class="form-group" align="right">
 										<div class="col-sm-12">
 										<br>
 										<button type="submit" class="btn btn-success">Submit</button>

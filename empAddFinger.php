@@ -66,11 +66,13 @@ include "empHeader.php";
 										</div>
 										
 										<div class="form-group">
-										<label for="exampleInputEmail1">Fingerprint Status:</label>
-										<div class="radio">
-										<label><input type="radio" name="fingerStatus" id="fingerStatus" value="PASS" required>PASS</label> &nbsp;&nbsp;
-										<label><input type="radio" name="fingerStatus" id="fingerStatus" value="FAIL">FAIL</label> &nbsp;&nbsp;
-										</div>
+										<label for="lblNation">Fingerprint Status:</label>
+										<select class="form-control" name="fingerStatus" id="fingerStatus" required>
+										<option value="">-- Choose Status --</option>
+										<option value="PASS">PASS</option>
+										<option value="FAIL">FAIL</option>
+										<option value="PENDING">PENDING</option>
+										</select>
 										</div>
 								
 										<div class="form-group">
