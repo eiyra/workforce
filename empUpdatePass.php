@@ -73,12 +73,6 @@ include "empHeader.php";
 						value="<?php echo $objResult1['passExpDate']; ?>" id="passExpDate" name="passExpDate" required>
 				</div>
 
-				<div class="form-group">
-					<label for="lblDate">Passport Taken Date:</label>
-					<input type="date" data-date-inline-picker="true" class="form-control"
-						value="<?php echo $objResult1['passTakenDate']; ?>" id="passTakenDate" name="passTakenDate"
-						required>
-				</div>
 
 				<div class="form-group">
 					<label for="passFile">Passport File:</label>
@@ -86,12 +80,12 @@ include "empHeader.php";
 					$filePath = $objResult1['passFile'];
 					$fileName = basename($filePath);
 					?>
-					<input type="text" class="form-control" name="namaFile" id="namaFile" accept=".pdf"
-						value="<?php echo $fileName; ?>" readonly>
+					<input type="text" class="form-control" name="namaFile" id="namaFile" value="<?php echo $fileName; ?>" readonly>
 					<a href="<?php echo $filePath; ?>" target="_blank" rel="noopener noreferrer">View PDF</a>
 
 					<input class="mt-3" type="file" name="pdf_file" id="pdf_file" accept=".pdf">
-				</div>
+				</div>  
+				
 
 				<div class="form-group">
 					<label for="inputName">Note :</label>
@@ -109,6 +103,16 @@ include "empHeader.php";
 					<div class="col-sm-12">
 						<br>
 						<button name="submit" type="submit" class="btn btn-success">Update</button>
+						<!-- <button id="myButton" class="btn btn-warning">Cancel</button>
+							<script type="text/javascript">
+							  // Define the function to handle the button click
+							  function handleButtonClick() {
+								location.href = "empViewFW.php";
+							  }
+
+							  // Attach the event handler to the button
+							  document.getElementById("myButton").onclick = handleButtonClick;
+							</script> -->
 					</div>
 				</div>
 
@@ -135,9 +139,8 @@ include "empHeader.php";
 
 <script>
 	var today = new Date().toISOString().split('T')[0];
-	document.getElementById("passIssuedDate").setAttribute('min', today);
+	document.getElementById("passIssuedDate").setAttribute('max', today);
 	document.getElementById("passExpDate").setAttribute('min', today);
-	document.getElementById("passTakenDate").setAttribute('min', today);
 </script>
 
 <?php

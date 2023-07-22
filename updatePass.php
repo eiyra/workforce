@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
     $passNo = $_POST['passNo'];
     $passIssuedDate = $_POST['passIssuedDate'];
     $passExpDate = $_POST['passExpDate'];
-    $passTakenDate = $_POST['passTakenDate'];
+    //$passTakenDate = $_POST['passTakenDate'];
     $passNote = $_POST['passNote'];
 
     // Fetch the existing data from the database
@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
 
         // Check if the uploaded file is a PDF
         if ($file_type !== 'pdf') {
-            echo "<script>window.alert('Failed! File must be uploaded in PDF format!'); window.location.href='empUpdatePass.php?passNo=" . $passNo . "';</script>";
+            echo "<script>window.alert('Failed! File must be uploaded in PDF format!'); window.location.href='empViewFW.php?fw_id=" . $fw_id . "';</script>";
             exit();
         }
 
@@ -47,13 +47,13 @@ if (isset($_POST['submit'])) {
 
         // Check if the file already exists
         if (file_exists($target_file)) {
-            echo "<script>window.alert('A file with that name already exists!'); window.location.href='empUpdatePass.php?passNo=" . $passNo . "';</script>";
+            echo "<script>window.alert('A file with that name already exists!'); window.location.href='empViewFW.php?fw_id=" . $fw_id . "';</script>";
             exit();
         }
 
         // Move the uploaded file to the desired directory
         if (!move_uploaded_file($file_tmp, $target_file)) {
-            echo "<script>window.alert('Failed to upload the file!'); window.location.href='empUpdatePass.php?passNo=" . $passNo . "';</script>";
+            echo "<script>window.alert('Failed to upload the file!'); window.location.href='empViewFW.php?fw_id=" . $fw_id . "';</script>";
             exit();
         }
     } else {
@@ -63,32 +63,31 @@ if (isset($_POST['submit'])) {
     }
 
     // Prepare the SQL query to insert or update the data
-    $sql = "INSERT INTO passport(fw_id,passNo,passIssuedDate,passExpDate,passTakenDate,passFile,passNote)
-            VALUES (?,?,?,?,?,?,?)
+    $sql = "INSERT INTO passport(fw_id,passNo,passIssuedDate,passExpDate,passFile,passNote)
+            VALUES (?,?,?,?,?,?)
             ON DUPLICATE KEY UPDATE
             passNo=VALUES(passNo),
             passIssuedDate=VALUES(passIssuedDate),
             passExpDate=VALUES(passExpDate),
-            passTakenDate=VALUES(passTakenDate),
             passFile=VALUES(passFile),
             passNote=VALUES(passNote)";
 
     // Use prepared statement to prevent SQL injection
     $stmt = mysqli_prepare($con, $sql);
-    if (!$stmt) {
-        echo "Error: " . mysqli_error($con);
-        exit();
+    if ($stmt) {
+        // Bind parameters and execute the query
+        mysqli_stmt_bind_param($stmt, "ssssss", $fw_id, $passNo, $passIssuedDate, $passExpDate, $target_file, $passNote);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+
+        echo "<script>window.alert('Successfully Updated!'); window.location.href='empViewFW.php?fw_id=" . $fw_id . "';</script>";
+    } else {
+        // Failed to prepare the statement
+        echo "Error: " . mysqli_error($con); // Display or log the error message here
     }
-
-    // Bind parameters and execute the query
-    mysqli_stmt_bind_param($stmt, "sssssss", $fw_id, $passNo, $passIssuedDate, $passExpDate, $passTakenDate, $target_file, $passNote);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
-
-    echo "<script>window.alert('Successfully Updated!'); window.location.href='empUpdatePass.php?passNo=" . $passNo . "';</script>";
-
 }
 
 // Close the database connection
 mysqli_close($con);
 ?>
+

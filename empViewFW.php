@@ -165,7 +165,6 @@ include "empHeader.php";
 									<th>Passport Number</th>
 									<th>Passport Issued Date</th>
 									<th>Passport Expiry Date</th>
-									<th>Passport Taken Date</th>
 									<th>Passport File</th>
 									<th>Remarks</th>
 									<th></th>
@@ -199,7 +198,6 @@ include "empHeader.php";
 										echo "<td>" . $row["passNo"] . "</td>";
 										echo "<td>" . $row["passIssuedDate"] . "</td>";
 										echo "<td>" . $row["passExpDate"] . "</td>";
-										echo "<td>" . $row["passTakenDate"] . "</td>";
 										echo "<td>" . $fileName . "</td>";
 										echo "<td>" . $row["passNote"] . "</td>";
 										echo "<td>
