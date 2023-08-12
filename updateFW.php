@@ -3,11 +3,17 @@
 
   $fw_id = $_POST["fw_id"];
   $fw_name = $_POST["fw_name"];
+  $fw_year = $_POST["fw_year"];
   $fw_nation = $_POST["fw_nation"];
   $fw_phone = $_POST["fw_phone"];
   $fw_phone2 = $_POST["fw_phone2"];
   $fw_phone3 = $_POST["fw_phone3"];
   $fw_address = $_POST["fw_address"];
+  $fw_gender = $_POST["fw_gender"];
+  $fw_intake = $_POST["fw_intake"];
+  $cvDateInput = $_POST["cvDateInput"];
+  $cvBatchInput = $_POST["cvBatchInput"];
+  $fw_register = $_POST["fw_register"];
   $fw_remarks = $_POST["fw_remarks"];
 
 

@@ -1,24 +1,49 @@
- <?php
-  include ('config.php');
+<?php
+include('config.php');
 
-  $fw_id = $_POST["fw_id"];
-  $medicalDate = $_POST["medicalDate"];
-  $immDate = $_POST["immDate"];
-  $medicalStatus = $_POST["medicalStatus"];
-  $medicNote = $_POST["medicNote"];
-  $medicEmpAssign = $_POST["medicEmpAssign"];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $fw_id = $_POST["fw_id"];
+	$majikanNo = $_POST["majikanNo"];
+    $majikanName = $_POST["majikanName"];
+    $majikanPhone = $_POST["majikanPhone"];
+    $majikanPhone2 = $_POST["majikanPhone2"];
+    $majikanEmail = $_POST["majikanEmail"];
+    $majikanEmail2 = $_POST["majikanEmail2"];
+	$majikanNote = $_POST["majikanNote"];
+    $majikanEmpAssign = $_POST["majikanEmpAssign"];
 
+    // Use prepared statement
+    $sql = "UPDATE majikan SET
+            majikanName = ?,
+            majikanPhone = ?,
+            majikanPhone2 = ?,
+            majikanEmail = ?,
+            majikanEmail2 = ?,
+			majikanNote = ?,
+            majikanEmpAssign = ?
+            WHERE majikanNo = ?";
 
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($stmt, "ssssssss",
+        $majikanName, $majikanPhone, $majikanPhone2,
+        $majikanEmail, $majikanEmail2, $majikanNote, $majikanEmpAssign, $majikanNo
+    );
 
-$sql = "UPDATE medical SET  medicalDate='".$medicalDate."' , immDate='" .$immDate."' , medicalStatus='" .$medicalStatus."' , medicNote='" .$medicNote."' , 
-medicEmpAssign='" .$medicEmpAssign."' 
- WHERE fw_id= '".$fw_id."'";
-$result = mysqli_query($con,$sql) or (mysqli_connect_error());
+    $result = mysqli_stmt_execute($stmt);
 
-echo '<script type="text/javascript">';
-echo 'alert("Successfully updated!");';
-echo 'window.location.href = "empFWList.php";';
-echo '</script>';
+    if ($result) {
+        echo '<script type="text/javascript">';
+        echo 'alert("Successfully updated!");';
+        echo "window.location.href='empViewFW.php?fw_id=" . $fw_id . "';</script>";
+        echo '</script>';
+    } else {
+        echo '<script type="text/javascript">';
+        echo 'alert("Error updating data!");';
+        echo "window.location.href='empViewFW.php?fw_id=" . $fw_id . "';</script>";
+        echo '</script>';
+    }
 
-
- ?>
+    mysqli_stmt_close($stmt);
+    mysqli_close($con);
+}
+?>

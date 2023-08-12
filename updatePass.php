@@ -45,7 +45,12 @@ if (isset($_POST['submit'])) {
         $target_directory = "./doc/passport/";
         $target_file = $target_directory . basename($file_name);
 
-        // Check if the file already exists
+        // Delete the old file if it exists
+        if (!empty($filePath) && file_exists($filePath)) {
+            unlink($filePath);
+        }
+
+        // Check if the new file already exists
         if (file_exists($target_file)) {
             echo "<script>window.alert('A file with that name already exists!'); window.location.href='empViewFW.php?fw_id=" . $fw_id . "';</script>";
             exit();
@@ -90,4 +95,3 @@ if (isset($_POST['submit'])) {
 // Close the database connection
 mysqli_close($con);
 ?>
-

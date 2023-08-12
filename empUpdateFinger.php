@@ -41,6 +41,8 @@ include "empHeader.php";
 										?>
 										
 										<input type="hidden" class="form-control" id="fw_id" name="fw_id" value="<?php echo $objResult1['fw_id']; ?>">
+										
+										<input type="hidden" class="form-control" id="fingerNo" name="fingerNo" value="<?php echo $objResult1['fingerNo']; ?>">
 					
 										<div class="form-group">
 										<label for="inputName">Name :</label>
@@ -51,10 +53,20 @@ include "empHeader.php";
 										<label for="inputName">Nationality :</label>
 										<input name="fw_nation" id="fw_nation" class="form-control" type="text" value="<?php echo $objResult1['fw_nation']; ?>" readonly>
 										</div>
+										
+										<div class="form-group">
+										<label for="inputName">Foreign Worker Year:</label>
+										<input name="fw_year" id="fw_year" class="form-control" type="text" value="<?php echo $objResult1['fw_year']; ?>" readonly>
+										</div>
+										
+										<div class="form-group">
+										<label for="inputName">Intake Type:</label>
+										<input name="fw_intake" id="fw_intake" class="form-control" type="text" value="<?php echo $objResult1['fw_intake']; ?>" readonly>
+										</div>			
 						
 										<div class="form-group">
 										<label for="lblDate">Fingerprint Date:</label>
-										<input type="date" data-date-inline-picker="true" value="<?php echo $objResult1['fingerDate']; ?>" class="form-control" id="fingerDate" name="fingerDate" required>
+										<input type="date" data-date-inline-picker="true" value="<?php echo $objResult1['fingerDate']; ?>" class="form-control" id="fingerDate" name="fingerDate">
 										</div>
 										
 										<div class="form-group">
@@ -115,6 +127,11 @@ include "empHeader.php";
 			<script src="js/jquery.nicescroll.js"></script>
 			<script src="js/scripts.js"></script>
 			<!--//scrolling js-->
+			
+			<script>
+			var today = new Date().toISOString().split('T')[0];
+			document.getElementById("fingerDate").setAttribute('max', today);
+			</script>
 
 <?php
 include "empFooter.php";                

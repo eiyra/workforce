@@ -41,6 +41,8 @@ include "empHeader.php";
 										?>
 										
 										<input type="hidden" class="form-control" id="fw_id" name="fw_id" value="<?php echo $objResult1['fw_id']; ?>">
+										
+										<input type="hidden" class="form-control" id="majikanNo" name="majikanNo" value="<?php echo $objResult1['majikanNo']; ?>">
 					
 										<div class="form-group">
 										<label for="inputName">Name :</label>
@@ -51,49 +53,49 @@ include "empHeader.php";
 										<label for="inputName">Nationality :</label>
 										<input name="fw_nation" id="fw_nation" class="form-control" type="text" value="<?php echo $objResult1['fw_nation']; ?>" readonly>
 										</div>
+										
+										<div class="form-group">
+										<label for="inputName">Foreign Worker Year:</label>
+										<input name="fw_year" id="fw_year" class="form-control" type="text" value="<?php echo $objResult1['fw_year']; ?>" readonly>
+										</div> 
+										
+										<div class="form-group">
+										<label for="inputName">Intake Type:</label>
+										<input name="fw_intake" id="fw_intake" class="form-control" type="text" value="<?php echo $objResult1['fw_intake']; ?>" readonly>
+										</div>
 						
 										<div class="form-group">
 										<label for="inputName">Employer Name:</label>
-										<input name="majikanName" id="majikanName" class="form-control" type="text">
+										<input name="majikanName" id="majikanName" class="form-control" type="text" value="<?php echo $objResult1['majikanName']; ?>" required>
 										</div>
 										
 										<div class="form-group">
 										<label for="exampleInputEmail1">Employer Phone Number (1):</label>
-										<input type="number" class="form-control" name="majikanPhone" id="majikanPhone" required>
+										<input type="number" class="form-control" name="majikanPhone" id="majikanPhone" value="<?php echo $objResult1['majikanPhone']; ?>" required>
 										</div>
 										
 										<div class="form-group">
 										<label for="exampleInputEmail1">Employer Phone Number (2):</label>
-										<input type="number" class="form-control" name="majikanPhone2" id="majikanPhone2">
+										<input type="number" class="form-control" name="majikanPhone2" id="majikanPhone2" value="<?php echo $objResult1['majikanPhone2']; ?>">
 										</div>
 										
 										<div class="form-group" align="left">
 										<label for="text">Employer Email (1):</label>
-										<input name="majikanEmail" type="majikanEmail" class="form-control" required>
+										<input name="majikanEmail" type="majikanEmail" class="form-control" value="<?php echo $objResult1['majikanEmail']; ?>">
 										</div>
 										
 										<div class="form-group" align="left">
 										<label for="text">Employer Email (2):</label>
-										<input name="majikanEmail2" type="majikanEmail2" class="form-control">
+										<input name="majikanEmail2" type="majikanEmail2" class="form-control" value="<?php echo $objResult1['majikanEmail2']; ?>">
 										</div>
 																	
 										<div class="form-group">
 										<label for="inputName">Note :</label>
-										<input name="majikanNote" id="majikanNote" class="form-control" type="text">
+										<input name="majikanNote" id="majikanNote" class="form-control" type="text" value="<?php echo $objResult1['majikanNote']; ?>">
 										</div>
 										
 										<input name="majikanEmpAssign" id="majikanEmpAssign" class="form-control" type="hidden" value="<?php echo $objResult['emp_name']; ?>" readonly>
 										
-										
-										<div class="form-group">
-										<label for="inputName">Note:</label>
-										<input name="medicNote" id="medicNote" class="form-control" type="text" value="<?php echo $objResult1['medicNote']; ?>">
-										</div>
-										
-		
-										<input name="medicEmpAssign" id="medicEmpAssign" class="form-control" type="hidden" value="<?php echo $objResult['medicEmpAssign']; ?>" readonly>
-										
-									
 										<div class="form-group" align="right">
 										<div class="col-sm-12">
 										<br>

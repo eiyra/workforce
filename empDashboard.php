@@ -24,11 +24,9 @@ include "empHeader.php";
 
 					<!--banner-->
 					<div class="banner">
-						<h2>
-							<a href="empDashboard.php">Home</a>
-							<i class="fa fa-angle-right"></i>
-							<span>Dashboard</span>
-						</h2>
+					<h4>
+					<span>List of 'Pending' Foreign Workers</span>
+					</h4>
 					</div>
 
           <div class="content-top">
@@ -37,7 +35,6 @@ include "empHeader.php";
 
 					<div class="content-mid">
 
-						<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>List of Pending Foreign Workers</b></div>
 						<br>
 								<div class='panel panel-primary'>
 									<div class='panel-body'>
@@ -48,11 +45,15 @@ include "empHeader.php";
 														<th> No </th>
 														<th> Name </th>
 														<th> Nationality </th>
+														<th> Year </th>
 														<th> Phone Number (1)</th>
 														<th> Phone Number (2)</th>
 														<th> Phone Number (3)</th>
+														<th> Address </th>
 														<th> Gender </th>
-														<th> Intake Type </th>		
+														<th> Intake Type </th>
+														<th> Calling Visa Date </th>
+														<th> Calling Visa Batch </th>
 														<th> Agency Registered </th>
 														<th> Note </th>
 														<th> Employee Assigned </th>
@@ -83,13 +84,17 @@ include "empHeader.php";
 																$i++;
 																echo "<tr>";
 																echo	"<td>". $i ."</td>";
-																echo 	"<td>".$row["fw_name"]."</td>";
+																echo 	"<td>". $row["fw_name"]."</td>";
 																echo 	"<td>". $row["fw_nation"] ."</td>";
+																echo 	"<td>". $row["fw_year"] ."</td>";
 																echo 	"<td>". $row["fw_phone"] ."</td>";
 																echo 	"<td>". $row["fw_phone2"] ."</td>";
 																echo 	"<td>". $row["fw_phone3"] ."</td>";
+																echo 	"<td>". $row["fw_address"] ."</td>";
 																echo 	"<td>". $row["fw_gender"] ."</td>";
 																echo 	"<td>". $row["fw_intake"] ."</td>";
+																echo 	"<td>". $row["cvDateInput"] ."</td>";
+																echo 	"<td>". $row["cvBatchInput"] ."</td>";
 																echo 	"<td>". $row["fw_register"] ."</td>";
 																echo 	"<td>". $row["fw_remarks"] ."</td>";
 																echo 	"<td>". $row["emp_assigned"] ."</td>";
@@ -102,11 +107,11 @@ include "empHeader.php";
 																echo "</tr>";
 															}
 														}
-														else{
-															echo "<tr>";
-															echo	"<td colspan='5'>No Result</td>";
-															echo "</tr>";
-														}
+														// else{
+															// echo "<tr>";
+															// echo	"<td colspan='14'>No Result</td>";
+															// echo "</tr>";
+														// }
 														mysqli_close($con);
 														?>
 												</tbody>

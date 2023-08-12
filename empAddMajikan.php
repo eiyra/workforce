@@ -27,6 +27,8 @@ include "empHeader.php";
 						<h2>
 							<a href="empDashboard.php">Home</a>
 							<i class="fa fa-angle-right"></i>
+							<a href="empFWList.php">Foreign Worker List</a>
+							<i class="fa fa-angle-right"></i>
 							<span>Add Employer Details</span>
 						</h2>
 					</div>
@@ -52,10 +54,21 @@ include "empHeader.php";
 										<input name="fw_nation" id="fw_nation" class="form-control" type="text" value="<?php echo $objResult1['fw_nation']; ?>" readonly>
 										</div>
 										
+										<div class="form-group">
+										<label for="inputName">Foreign Worker Year:</label>
+										<input name="fw_year" id="fw_year" class="form-control" type="text" value="<?php echo $objResult1['fw_year']; ?>" readonly>
+										</div> 
+										
+										<div class="form-group">
+										<label for="inputName">Intake Type:</label>
+										<input name="fw_intake" id="fw_intake" class="form-control" type="text" value="<?php echo $objResult1['fw_intake']; ?>" readonly>
+										</div>
+										
+										<!-- <input name="majikanNo" id="majikanNo" class="form-control" type="hidden"> -->
 										
 										<div class="form-group">
 										<label for="inputName">Employer Name:</label>
-										<input name="majikanName" id="majikanName" class="form-control" type="text">
+										<input name="majikanName" id="majikanName" class="form-control" type="text" required>
 										</div>
 										
 										<div class="form-group">
@@ -70,7 +83,7 @@ include "empHeader.php";
 										
 										<div class="form-group" align="left">
 										<label for="text">Employer Email (1):</label>
-										<input name="majikanEmail" type="majikanEmail" class="form-control" required>
+										<input name="majikanEmail" type="majikanEmail" class="form-control">
 										</div>
 										
 										<div class="form-group" align="left">

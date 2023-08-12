@@ -53,6 +53,16 @@ include "empHeader.php";
 					<input name="fw_nation" id="fw_nation" class="form-control" type="text"
 						value="<?php echo $objResult1['fw_nation']; ?>" readonly>
 				</div>
+				
+				<div class="form-group">
+				<label for="inputName">Foreign Worker Year:</label>
+				<input name="fw_year" id="fw_year" class="form-control" type="text" value="<?php echo $objResult1['fw_year']; ?>" readonly>
+				</div> 
+										
+				<div class="form-group">
+				<label for="inputName">Intake Type:</label>
+				<input name="fw_intake" id="fw_intake" class="form-control" type="text" value="<?php echo $objResult1['fw_intake']; ?>" readonly>
+				</div>
 
 				<div class="form-group">
 					<label for="inputName">Passport Number :</label>

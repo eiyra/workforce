@@ -25,368 +25,144 @@ include "empHeader.php";
 					<!--banner-->
 					<div class="banner">
 						<h2>
-							<a href="empDashboard.php">Home</a>
+							<a href="empReport.php">Report</a>
 							<i class="fa fa-angle-right"></i>
-							<span>Report Overview</span>
+							<a href="empPassReport.php">Passport Report</a>
 						</h2>
 					</div>
 					
 					<br>
 
-         			<!-- Tab links -->
-					<div class="tab">
-					<button class="tablinks" onclick="openCity(event, 'Passport')" id="defaultOpen">Passport</button>
-					<button class="tablinks" onclick="openCity(event, 'Permit')">Permit</button>
-					<button class="tablinks" onclick="openCity(event, 'Medical')">Medical</button>
-					<button class="tablinks" onclick="openCity(event, 'Payment')">Payment</button>
-					</div>
-							
-							<!-- Tab content -->
-							<div id="Passport" class="tabcontent">
-							<br>
-							
 					
 							<div class='panel panel-primary'>
 							<div class='panel-body'>
 							<div class="table-responsive">
 							
 							
-							<form class="form-inline" method="POST">
+							<form class="form-inline" method="GET">
 							<div class="form-group">
 							<i class="fa fa-search nav_icon "></i>
-							<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>SEARCH :</label>  -->
 							<select class="form-control" name="status" required>
 							<option value=""></option>
-							<option value="3MONTHS">Passport Expires Within 18 Months</option>
-							<option value="Nationality">Nationality</option>
-							<option value="REJECTED">Rejected</option>
+							<option value="18MONTHS">Passport Expires Within 18 Months</option>
+							<option value="6MONTHS">Passport Expires Within 6 Months</option>
 							</select>
+							&nbsp;&nbsp;
 							<button type="submit" name="searchStatus" id="searchStatus" class="btn btn-primary btn-sm">Submit</button>
 							
 							</div>
 							</form>
 
+							<br><br>
+							
+							<?php
+							include 'config.php';
 
-				<br>
-				<br>
-				<?php
-					include 'config.php';
+							// Fetch all data from the table initially
+							$query = "SELECT * FROM passport NATURAL JOIN fw ORDER BY fw_name ASC";
+							$result = mysqli_query($con, $query) or die(mysqli_error());
+							$i = 0;
 
-					if ((isset($_POST['searchStatus'])))
-					{
-						if($_POST['status'])
-						{
-							$status=$_POST['status'];
-						}
-							// $sessions = $_SESSION['fw_id'];
+							// Check if the filter value is present in the URL
+							if (isset($_GET['status'])) {
+								$status = $_GET['status'];
 
-						$query = mysqli_query($con,"SELECT * from passport NATURAL JOIN fw WHERE passExpDate BETWEEN date_sub(now(), interval 0 day) 
-						AND date_add(now(), interval 18 month) ORDER BY fw_name ASC") or die(mysqli_error());
-						$i = 0;
+								// Generate the appropriate query based on the selected filter value
+								if ($status == '18MONTHS') {
+									$query = "SELECT * FROM passport NATURAL JOIN fw WHERE passExpDate BETWEEN date_sub(now(), interval 0 day) AND date_add(now(), interval 18 month) ORDER BY fw_name ASC";
+								} else if ($status == '6MONTHS') {
+									$query = "SELECT * FROM passport NATURAL JOIN fw WHERE passExpDate BETWEEN date_sub(now(), interval 0 day) AND date_add(now(), interval 6 month) ORDER BY fw_name ASC";
+								}
+
+								$result = mysqli_query($con, $query) or die(mysqli_error());
+							}
 
 								echo "<div class='panel panel-primary'>";
-								echo 		"<div class='panel-body'>";
-								echo 			"<table class='table table-hover'id='example'>";
-								echo 				"<thead>";
-								echo 					"<tr>";
-								echo 						"<th>No</th>";
-								echo 						"<th>Name</th>";
-								echo 						"<th>Nationality</th>";
-								echo 						"<th>Phone Number</th>";
-								echo 						"<th>Intake Type</th>";
-								echo 						"<th>Agency Registered</th>";
-								echo 						"<th>Passport Number</th>";
-								echo 						"<th>Passport Expiry Date</th>";
-								echo 					"</tr>";
-								echo 				"</thead>";
-								echo 				"<tbody>";
+								echo "<div class='panel-body'>";
+								echo "<table class='table table-hover' id='example'>";
+								echo "<thead>";
+								echo "<tr>";
+								echo "<th>No</th>";
+								echo "<th>Name</th>";
+								echo "<th>Nationality</th>";
+								echo "<th>Year</th>";
+								echo "<th>Phone Number (1)</th>";
+								echo "<th>Phone Number (2)</th>";
+								echo "<th>Phone Number (3)</th>";
+								echo "<th>Intake Type</th>";
+								echo "<th>Calling Visa Date</th>";
+								echo "<th>Calling Visa Batch</th>";
+								echo "<th>Agency Registered</th>";
+								echo "<th>Passport Number</th>";
+								echo "<th>Passport Expiry Date</th>";
+								echo "<th>Remarks</th>";
+								echo "</tr>";
+								echo "</thead>";
+								echo "<tbody>";
 
-
-
-						if(mysqli_num_rows($query) > 0)
-						{
-							while($row = mysqli_fetch_assoc($query))
-							{
+								if (mysqli_num_rows($result) > 0) {
+								while ($row = mysqli_fetch_assoc($result)) 
+								{
 
 								$fw_name = $row["fw_name"];
 								$fw_nation = $row["fw_nation"];
+								$fw_year = $row["fw_year"];
 								$fw_phone = $row["fw_phone"];
+								$fw_phone2 = $row["fw_phone2"];
+								$fw_phone3 = $row["fw_phone3"];
 								$fw_intake = $row["fw_intake"];
+								$cvDateInput = $row["cvDateInput"];
+								$cvBatchInput = $row["cvBatchInput"];
 								$fw_register = $row["fw_register"];
 								$passNo = $row["passNo"];
 								$passExpDate = $row["passExpDate"];
-								
+								$passNote = $row["passNote"];
 
 								$i++;
 
-									if($status == '3MONTHS')
-
-									{
-
-											echo 					"<tr>";
-											echo 						"<td>".$i."</td>";
-											echo						"<td>".$fw_name."</td>";
-											echo						"<td>".$fw_nation."</td>";
-											echo						"<td>".$fw_phone."</td>";
-											echo						"<td>".$fw_intake."</td>";
-											echo						"<td>".$fw_register."</td>";
-											echo						"<td>".$passNo."</td>";
-											echo						"<td>".$passExpDate."</td>";
-
-											// echo						"<td><a href='customerBookingForm.php?mua_ic=".$mua_ic."'<button class='btn btn-md btn-success'>Edit</button></a></td>";
-											// echo						"<td><a href='customerDeleteBooking.php?app_id=".$app_id."'<button class='btn btn-md btn-danger' onclick='return checkDelete()'>Delete</button></a></td>";
-
-											echo 					"</tr>";
-										}
-
-
-
-									else if($status == 'CONFIRMED')
-									{
-
-										echo 					"<tr>";
-										echo 						"<td>".$i."</td>";
-										echo						"<td>".$mua_name."</td>";
-										echo						"<td>".$mua_phone_no." kg</td>";
-										echo						"<td>".$mua_address."</td>";
-										echo						"<td>".$app_status."</td>";
-										echo						"<td>".$app_date."</td>";
-										echo						"<td>".$app_session."</td>";
-										echo						"<td>".$total_charge."</td>";
-										echo 					"</tr>";
-
-										}
-
-
-									else if($status == 'REJECTED')
-									{
-
-										echo 					"<tr>";
-										echo 						"<td>".$i."</td>";
-										echo						"<td>".$mua_name."</td>";
-										echo						"<td>".$mua_phone_no." kg</td>";
-										echo						"<td>".$mua_address."</td>";
-										echo						"<td>".$app_status."</td>";
-										echo						"<td>".$app_date."</td>";
-										echo						"<td>".$app_session."</td>";
-										echo						"<td>".$total_charge."</td>";
-										echo 					"</tr>";
-									}
-							}
-						}
-
-						else
-						{
 								echo "<tr>";
-								echo 	"<td colspan='3'>No Result </td>";
+								echo "<td>" . $i . "</td>";
+								echo "<td>" . $fw_name . "</td>";
+								echo "<td>" . $fw_nation . "</td>";
+								echo "<td>" . $fw_year . "</td>";
+								echo "<td>" . $fw_phone . "</td>";
+								echo "<td>" . $fw_phone2 . "</td>";
+								echo "<td>" . $fw_phone3 . "</td>";
+								echo "<td>" . $fw_intake . "</td>";
+								echo "<td>" . $cvDateInput . "</td>";
+								echo "<td>" . $cvBatchInput . "</td>";
+								echo "<td>" . $fw_register . "</td>";
+								echo "<td>" . $passNo . "</td>";
+								echo "<td>" . $passExpDate . "</td>";
+								echo "<td>" . $passNote . "</td>";
 								echo "</tr>";
-						}
-
-								echo				"</tbody>";
-								echo 			"</table>";
-								echo		"</div>";
-
-								echo "</div>";
-					}
-
-
-				?>
-
-
-											
-										
-											
-							</div>
-							</div>
-							</div>
-							
-							</div>
-							
-
-							<div id="Permit" class="tabcontent">
-							
-							<div class='panel panel-primary'>
-							<div class='panel-body'>
-							<div class="table-responsive">
-							
-							
-							<form class="form-inline" method="POST">
-							<div class="form-group">
-							<i class="fa fa-search nav_icon "></i>
-							<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>SEARCH :</label>  -->
-							<select class="form-control" name="status" required>
-							<option value=""></option>
-							<option value="3MONTHS">Passport Expires Within 18 Months</option>
-							<option value="Nationality">Nationality</option>
-							<option value="REJECTED">Rejected</option>
-							</select>
-							<button type="submit" name="searchStatus" id="searchStatus" class="btn btn-primary btn-sm">Submit</button>
-							
-							</div>
-							</form>
-
-
-				<br>
-				<br>
-				<?php
-					include 'config.php';
-
-					if ((isset($_POST['searchStatus'])))
-					{
-						if($_POST['status'])
-						{
-							$status=$_POST['status'];
-						}
-							// $sessions = $_SESSION['fw_id'];
-
-						$query = mysqli_query($con,"SELECT * from passport NATURAL JOIN fw WHERE passExpDate BETWEEN date_sub(now(), interval 0 day) 
-						AND date_add(now(), interval 18 month) ORDER BY fw_name ASC") or die(mysqli_error());
-						$i = 0;
-
-								echo "<div class='panel panel-primary'>";
-								echo 		"<div class='panel-body'>";
-								echo 			"<table class='table table-hover'id='example'>";
-								echo 				"<thead>";
-								echo 					"<tr>";
-								echo 						"<th>No</th>";
-								echo 						"<th>Name</th>";
-								echo 						"<th>Nationality</th>";
-								echo 						"<th>Phone Number</th>";
-								echo 						"<th>Intake Type</th>";
-								echo 						"<th>Agency Registered</th>";
-								echo 						"<th>Passport Number</th>";
-								echo 						"<th>Passport Expiry Date</th>";
-								echo 					"</tr>";
-								echo 				"</thead>";
-								echo 				"<tbody>";
-
-
-
-						if(mysqli_num_rows($query) > 0)
-						{
-							while($row = mysqli_fetch_assoc($query))
-							{
-
-								$fw_name = $row["fw_name"];
-								$fw_nation = $row["fw_nation"];
-								$fw_phone = $row["fw_phone"];
-								$fw_intake = $row["fw_intake"];
-								$fw_register = $row["fw_register"];
-								$passNo = $row["passNo"];
-								$passExpDate = $row["passExpDate"];
+								}
+								}
 								
+								// else 
+								// {
+								// echo "<tr>";
+								// echo "<td colspan='12'>No Result </td>";
+								// echo "</tr>";
+								// }
 
-								$i++;
-
-									if($status == '3MONTHS')
-
-									{
-
-											echo 					"<tr>";
-											echo 						"<td>".$i."</td>";
-											echo						"<td>".$fw_name."</td>";
-											echo						"<td>".$fw_nation."</td>";
-											echo						"<td>".$fw_phone."</td>";
-											echo						"<td>".$fw_intake."</td>";
-											echo						"<td>".$fw_register."</td>";
-											echo						"<td>".$passNo."</td>";
-											echo						"<td>".$passExpDate."</td>";
-
-											// echo						"<td><a href='customerBookingForm.php?mua_ic=".$mua_ic."'<button class='btn btn-md btn-success'>Edit</button></a></td>";
-											// echo						"<td><a href='customerDeleteBooking.php?app_id=".$app_id."'<button class='btn btn-md btn-danger' onclick='return checkDelete()'>Delete</button></a></td>";
-
-											echo 					"</tr>";
-										}
-
-
-
-									else if($status == 'CONFIRMED')
-									{
-
-										echo 					"<tr>";
-										echo 						"<td>".$i."</td>";
-										echo						"<td>".$mua_name."</td>";
-										echo						"<td>".$mua_phone_no." kg</td>";
-										echo						"<td>".$mua_address."</td>";
-										echo						"<td>".$app_status."</td>";
-										echo						"<td>".$app_date."</td>";
-										echo						"<td>".$app_session."</td>";
-										echo						"<td>".$total_charge."</td>";
-										echo 					"</tr>";
-
-										}
-
-
-									else if($status == 'REJECTED')
-									{
-
-										echo 					"<tr>";
-										echo 						"<td>".$i."</td>";
-										echo						"<td>".$mua_name."</td>";
-										echo						"<td>".$mua_phone_no." kg</td>";
-										echo						"<td>".$mua_address."</td>";
-										echo						"<td>".$app_status."</td>";
-										echo						"<td>".$app_date."</td>";
-										echo						"<td>".$app_session."</td>";
-										echo						"<td>".$total_charge."</td>";
-										echo 					"</tr>";
-									}
-							}
-						}
-
-						else
-						{
-								echo "<tr>";
-								echo 	"<td colspan='3'>No Result </td>";
-								echo "</tr>";
-						}
-
-								echo				"</tbody>";
-								echo 			"</table>";
-								echo		"</div>";
-
+								echo "</tbody>";
+								echo "</table>";
 								echo "</div>";
-					}
+								echo "</div>";
+							
+							?>
 
-
-				?>
-
-
-											
-										
+			
 											
 							</div>
 							</div>
 							</div>
 							
-							</div>
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							</div>
-
-							<div id="Medical" class="tabcontent">
-							<h3>Tokyo</h3>
-							<p>Tokyo is the capital of Japan.</p>
-							</div>
-							
-							<div id="Payment" class="tabcontent">
-							<h3>Tokyo</h3>
-							<p>Tokyo is the capital of Japan.</p>
-							</div>
 							
 							<br><br><br>
 							
 
-	
 						
 				</div>
 
@@ -403,35 +179,7 @@ include "empHeader.php";
 			<script src="js/jquery.nicescroll.js"></script>
 			<script src="js/scripts.js"></script>
 			<!--//scrolling js-->
-			
-			
-			<script>
-			
-			function openCity(evt, cityName) {
-			  // Declare all variables
-			  var i, tabcontent, tablinks;
-
-			  // Get all elements with class="tabcontent" and hide them
-			  tabcontent = document.getElementsByClassName("tabcontent");
-			  for (i = 0; i < tabcontent.length; i++) {
-				tabcontent[i].style.display = "none";
-			  }
-
-			  // Get all elements with class="tablinks" and remove the class "active"
-			  tablinks = document.getElementsByClassName("tablinks");
-			  for (i = 0; i < tablinks.length; i++) {
-				tablinks[i].className = tablinks[i].className.replace(" active", "");
-			  }
-
-			  // Show the current tab, and add an "active" class to the button that opened the tab
-			  document.getElementById(cityName).style.display = "block";
-			  evt.currentTarget.className += " active";
-			}
-			
-			document.getElementById("defaultOpen").click();
-			
-			</script>
-			
+				
 
 <?php
 include "empFooter.php";                

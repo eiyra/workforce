@@ -53,20 +53,30 @@ include "empHeader.php";
 										</div> 
 										
 										<div class="form-group">
-										<label for="inputName">Year:</label>
-										<input name="fw_year" id="fw_year" class="form-control" type="text"  readonly>
-										</div> <br>
+										<label for="inputName">Foreign Worker Year:</label>
+										<input name="fw_year" id="fw_year" class="form-control" type="text" value="<?php echo $objResult1['fw_year']; ?>" readonly>
+										</div> 
 										
+										<div class="form-group">
+										<label for="lblFwType">Foreign Worker Type:</label>
+										<select class="form-control" name="fwType" id="fwType" required>
+										<option value="">-- Please Select An Option --</option>
+										<option value="Budak Lama">Budak Lama</option>
+										<option value="Budak Baru">Budak Baru</</option>
+										</select>
+										</div>
+										
+										<br>
 										
 										<div class="form-group">
 										<label for="inputName">Serial No. 1:</label>
-										<input name="serialOne" id="serialOne" class="form-control" type="number">
+										<input name="serialOne" id="serialOne" class="form-control" type="text" required>
 										
 										<label for="lblDate">First Payment Date:</label>
 										<input type="date" data-date-inline-picker="true" class="form-control" id="firstPayDate" name="firstPayDate" placeholder="dd/mm/yyyy" required>
 										
-										<label for="inputName">First Payment:</label>
-										<input name="firstPay" id="firstPay" class="form-control" type="number" required>
+										<label for="inputName">First Payment Amount (RM):</label>
+										<input name="firstPay" id="firstPay" class="form-control" type="number" step=".01" required>
 																	
 										<label for="lblNation">First Payment Method:</label>
 										<select class="form-control" name="firstMethod" id="firstMethod" required>
@@ -76,49 +86,38 @@ include "empHeader.php";
 										</select>
 										</div>
 										
-										<br> 
+										<br>
 										
 										<div class="form-group">
-										<label for="inputName">Serial No. 2:</label>
-										<input name="serialTwo" id="serialTwo" class="form-control" type="number">
-										
-										<label for="lblDate">Second Payment Date:</label>
-										<input type="date" data-date-inline-picker="true" class="form-control" id="secondPayDate" name="secondPayDate" placeholder="dd/mm/yyyy">
-										
-										<label for="inputName">Second Payment:</label>
-										<input name="secondPay" id="secondPay" class="form-control" type="number">
-										
-										<label for="lblNation">Second Payment Method:</label>
-										<select class="form-control" name="secondMethod" id="secondMethod">
-										<option value="">-- Select Payment Method --</option>
-										<option value="Cash">Cash</option>
-										<option value="Online">Online</option>
+										<label for="lblNation">Payment Status:</label>
+										<select class="form-control" name="payStatus" id="payStatus" required>
+										<option value="">-- Select Payment Status --</option>
+										<option value="ONGOING">ONGOING</option>
+										<option value="DONE WITH SOCSO">PAYMENT DONE WITH SOCSO</option>
+										<option value="DONE WITHOUT SOCSO">PAYMENT DONE WITHOUT SOCSO</option>
 										</select>
 										</div>
 										
-										<br> 
-										
-										<div class="form-group">
-										<label for="inputName">Serial No. 3:</label>
-										<input name="serialThree" id="serialThree" class="form-control" type="number">
-										
-										<label for="lblDate">Third Payment Date:</label>
-										<input type="date" data-date-inline-picker="true" class="form-control" id="thirdPayDate" name="thirdPayDate" placeholder="dd/mm/yyyy">
-										
-										<label for="lblNation">Third Payment Method:</label>
-										<select class="form-control" name="thirdMethod" id="thirdMethod">
-										<option value="">-- Select Payment Method --</option>
-										<option value="Cash">Cash</option>
-										<option value="Online">Online</option>
-										</select>
-										</div>
-										
-										<br><br>
+										<br>
 											
 										<div class="form-group">
 										<label for="inputName">Total Amount Paid (RM):</label>
 										<input name="totalPay" id="totalPay" class="form-control" type="text" readonly>
 										</div>
+										
+										<script>
+										// Get references to the input elements
+										const firstPayInput = document.getElementById('firstPay');
+										const totalPayInput = document.getElementById('totalPay');
+
+										// Add an event listener to the firstPay input
+										firstPayInput.addEventListener('input', function () {
+											// Set the totalPay value to be the same as the firstPay value
+											totalPayInput.value = this.value;
+										});
+										</script>
+										
+										<br><br>
 										
 										<div class="form-group">
 										<label for="inputName">Note :</label>
@@ -169,50 +168,8 @@ include "empHeader.php";
 			<script>
 			var today = new Date().toISOString().split('T')[0];
 			document.getElementById("firstPayDate").setAttribute('max', today);
-			document.getElementById("secondPayDate").setAttribute('max', today);
-			document.getElementById("thirdPayDate").setAttribute('max', today);
 			</script>
 			
-			
-			<script type="text/javascript">
-
-
-					function calculateTotal(){
-
-						var chrg = document.getElementById("charge").value;
-
-
-				  //Get selected data
-				  var elt = document.getElementById("makeupLook");
-				  var look = elt.options[elt.selectedIndex].value;
-
-				  var elt = document.getElementById("person");
-				  var prson = elt.options[elt.selectedIndex].value;
-
-				  //convert data to integers
-				  look = parseInt(look);
-					chrg = parseInt(chrg);
-						prson = parseInt(prson);
-
-				  //calculate total value
-						var plus = look+chrg;
-				  var total = prson*plus;
-						// var total = prson*plus;
-						if (total > 800)
-						{
-					total = total*0.9 ;
-						}
-						else
-						{
-					total = total;
-						}
-
-				  //print value
-				  document.getElementById("total_charge").value=total;
-
-			 }
-
-			 </script>
 		
 
 <?php

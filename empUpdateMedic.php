@@ -41,6 +41,8 @@ include "empHeader.php";
 										?>
 										
 										<input type="hidden" class="form-control" id="fw_id" name="fw_id" value="<?php echo $objResult1['fw_id']; ?>">
+										
+										<input type="hidden" class="form-control" id="medicalNo" name="medicalNo" value="<?php echo $objResult1['medicalNo']; ?>">
 					
 										<div class="form-group">
 										<label for="inputName">Name :</label>
@@ -50,6 +52,16 @@ include "empHeader.php";
 										<div class="form-group">
 										<label for="inputName">Nationality :</label>
 										<input name="fw_nation" id="fw_nation" class="form-control" type="text" value="<?php echo $objResult1['fw_nation']; ?>" readonly>
+										</div>
+										
+										<div class="form-group">
+										<label for="inputName">Foreign Worker Year:</label>
+										<input name="fw_year" id="fw_year" class="form-control" type="text" value="<?php echo $objResult1['fw_year']; ?>" readonly>
+										</div>
+										
+										<div class="form-group">
+										<label for="inputName">Intake Type:</label>
+										<input name="fw_intake" id="fw_intake" class="form-control" type="text" value="<?php echo $objResult1['fw_intake']; ?>" readonly>
 										</div>
 						
 										<div class="form-group">
@@ -119,6 +131,12 @@ include "empHeader.php";
 			<script src="js/jquery.nicescroll.js"></script>
 			<script src="js/scripts.js"></script>
 			<!--//scrolling js-->
+			
+			<script>
+			var today = new Date().toISOString().split('T')[0];
+			document.getElementById("medicalDate").setAttribute('max', today);
+			document.getElementById("immDate").setAttribute('max', today);
+			</script>
 
 <?php
 include "empFooter.php";                

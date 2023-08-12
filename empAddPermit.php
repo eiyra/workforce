@@ -53,70 +53,72 @@ include "empHeader.php";
 										</div>
 										
 										<div class="form-group">
+										<label for="inputName">Foreign Worker Year :</label>
+										<input name="fw_year" id="fw_year" class="form-control" type="number" value="<?php echo $objResult1['fw_year']; ?>" readonly>
+										</div>
+										
+										<div class="form-group">
+										<label for="inputName">Intake Type:</label>
+										<input name="fw_intake" id="fw_intake" class="form-control" type="text" value="<?php echo $objResult1['fw_intake']; ?>" readonly>
+										</div>
+										
+										<div class="form-group">
 										<label for="inputName">Permit Number :</label>
 										<input name="permitNo" id="permitNo" class="form-control" type="text" required>
 										</div>
 										
 										<div class="form-group">
 										<label for="lblDate">Permit Issued Date:</label>
-										<input type="date" data-date-inline-picker="true" value="dd/mm/yyyy" class="form-control" id="permitIssuedDate" name="permitIssuedDate" placeholder="dd/mm/yyyy" value="<?= date('Y-m-d', time()); ?>">
+										<input type="date" data-date-inline-picker="true" value="dd/mm/yyyy" class="form-control" id="permitIssuedDate" name="permitIssuedDate" placeholder="dd/mm/yyyy" required>
 										</div>
 										
 										<div class="form-group">
 										<label for="lblDate">Permit Expiry Date:</label>
-										<input type="date" data-date-inline-picker="true" value="dd/mm/yyyy" class="form-control" id="permitExpDate" name="permitExpDate" placeholder="dd/mm/yyyy" value="<?= date('Y-m-d', time()); ?>">								
+										<input type="date" data-date-inline-picker="true" value="dd/mm/yyyy" class="form-control" id="permitExpDate" name="permitExpDate" placeholder="dd/mm/yyyy" required>								
 										</div>
 										
 										<div class="form-group">
 										<label for="lblDate">Permit Taken Date:</label>
-										<input type="date" data-date-inline-picker="true" value="dd/mm/yyyy" class="form-control" id="permitTakenDate" name="permitTakenDate" placeholder="dd/mm/yyyy" value="<?= date('Y-m-d', time()); ?>">
+										<input type="date" data-date-inline-picker="true" class="form-control" id="permitTakenDate" name="permitTakenDate" placeholder="dd/mm/yyyy">
 										</div>
+
+										<div class="form-group" id="permitMethodGroup" style="display: none;">
+										<label for="lblNation">Permit Taken Method:</label>
+										<select class="form-control" name="permitMethod" id="permitMethod" required>
+										<option value="">-- Select Taken Method --</option>
+										<option value="BY HAND">BY HAND</option>
+										<option value="BY POST">BY POST</option>
+										</select>
+										</div>
+
+										<script>
+											const permitTakenDateInput = document.getElementById('permitTakenDate');
+											const permitMethodGroup = document.getElementById('permitMethodGroup');
+
+											permitTakenDateInput.addEventListener('change', function() {
+												const permitTakenDateValue = this.value;
+												permitMethodGroup.style.display = permitTakenDateValue ? 'block' : 'none';
+											});
+										</script>
+
 										
 										<div class="form-group">
 										<label for="passFile">Permit File:</label>
 										<!--<input type="file" class="form-control" name="permitFile" id="permitFile" accept=".pdf" placeholder=""> -->
-										<input type="file" class="form-control" name="permitFile" id="permitFile" accept=".pdf" required> 
+										<input type="file" class="form-control" name="permitFile" id="permitFile" accept=".pdf"> 
 										</div>
-																		
-										<div class="form-group">
-										<label for="lblNation">Permit Status:</label>
-										  <select class="form-control" name="permitStatus" id="permitStatus" required>
-										  <option value="">-- Select Status --</option>
-											<option value="PASS">PASS</option>
-											<option value="FAIL">FAIL</option>
-											<option value="PENDING">PENDING</option>
-										  </select>
-										</div>
-										
-											<!-- <div class="form-group">
-										  <label for="lblNation">Permit Status:</label>
-										  <select class="form-control" name="permitStatus" id="permitStatus">
-											<option value="PASS" <?php echo ($objResult1['permitStatus'] === 'PASS') ? 'selected' : ''; ?>>PASS</option>
-											<option value="FAIL" <?php echo ($objResult1['permitStatus'] === 'FAIL') ? 'selected' : ''; ?>>FAIL</option>
-											<option value="PENDING" <?php echo ($objResult1['permitStatus'] === 'PENDING') ? 'selected' : ''; ?>>PENDING</option>
-										  </select>
-										</div>  -->
-										
-										
-										<div class="form-group">
-										<label for="inputName">Permit Year :</label>
-										<input name="permitYear" id="permitYear" class="form-control" type="number">
-										</div>
-										
+																			
 										<div class="form-group">
 										<label for="inputName">Note :</label>
 										<input name="permitNote" id="permitNote" class="form-control" type="text">
 										</div>
 										
-										<div class="form-group">
-										<label for="inputName">Employee Assigned :</label>
-										<input name="permitEmpAssign" id="permitEmpAssign" class="form-control" type="text" value="<?php echo $objResult['emp_name']; ?>" readonly>
-										</div>
+										<input name="permitEmpAssign" id="permitEmpAssign" class="form-control" type="hidden" value="<?php echo $objResult['emp_name']; ?>" readonly>
 									
 										<div class="form-group" align="right">
 										<div class="col-sm-12">
 										<br>
-										<button type="submit" class="btn btn-success">Submit</button>
+										<button type="submit" class="btn btn-success" name="submit">Submit</button>
 										<button id="myButton" onclick="history.go(-1);" class="btn btn-warning">Cancel</button>
 										
 											<!-- <script type="text/javascript">
@@ -127,6 +129,7 @@ include "empHeader.php";
 
 										</div>
 										</div>
+										
 							
 										<br /><br /><br /><br /><br /><br /><br />
 										 

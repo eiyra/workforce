@@ -53,6 +53,16 @@ include "empHeader.php";
 					<input name="fw_nation" id="fw_nation" class="form-control" type="text"
 						value="<?php echo $objResult1['fw_nation']; ?>" readonly>
 				</div>
+				
+				<div class="form-group">
+				<label for="inputName">Foreign Worker Year:</label>
+				<input name="fw_year" id="fw_year" class="form-control" type="text" value="<?php echo $objResult1['fw_year']; ?>" readonly>
+				</div> 
+										
+				<div class="form-group">
+				<label for="inputName">Intake Type:</label>
+				<input name="fw_intake" id="fw_intake" class="form-control" type="text" value="<?php echo $objResult1['fw_intake']; ?>" readonly>
+				</div>
 
 				<div class="form-group">
 					<label for="inputName">Passport Number :</label>
@@ -69,15 +79,9 @@ include "empHeader.php";
 					<input type="date" data-date-inline-picker="true" class="form-control" id="passExpDate" name="passExpDate" required>
 				</div>
 
-				<!-- <div class="form-group">
-					<label for="lblDate">Passport Taken Date:</label>
-					<input type="date" data-date-inline-picker="true" class="form-control" id="passTakenDate" name="passTakenDate">
-				</div>   -->
-
 				<div class="form-group">
 					<label for="passFile">Passport File:</label>
-					<!--<input class="mt-3" type="file" name="pdf_file" id="pdf_file" accept=".pdf"> -->
-					<input type="file" class="mt-3" name="passFile" id="passFile" accept=".pdf" required> 
+					<input type="file" class="form-control" name="passFile" id="passFile" accept=".pdf"> 
 				</div>
 
 				<div class="form-group">
@@ -86,8 +90,7 @@ include "empHeader.php";
 				</div>
 
 
-				<input name="passEmpAssign" id="passEmpAssign" class="form-control" type="hidden"
-					value="<?php echo $objResult['emp_name']; ?>" readonly>
+				<input name="passEmpAssign" id="passEmpAssign" class="form-control" type="hidden" value="<?php echo $objResult['emp_name']; ?>" readonly>
 
 
 				<div class="form-group" align="right">

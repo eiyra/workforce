@@ -24,12 +24,12 @@
 		<link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
 		
 		<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 		<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
 		<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
 		<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
-		
 		
 
 		<script>

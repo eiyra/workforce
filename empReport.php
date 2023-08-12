@@ -24,11 +24,9 @@ include "empHeader.php";
 
 					<!--banner-->
 					<div class="banner">
-						<h2>
-							<a href="empDashboard.php">Home</a>
-							<i class="fa fa-angle-right"></i>
+						<h4>
 							<span>Foreign Workers List</span>
-						</h2>
+						</h4>
 					</div>
 					
 				<div class="content-top">
@@ -63,16 +61,19 @@ include "empHeader.php";
 														<th> No </th>
 														<th> Name </th>
 														<th> Nationality </th>
+														<th> Year </th>
 														<th> Phone Number </th>
 														<th> Phone Number 2</th>
 														<th> Phone Number 3</th>
 														<th> Address</th>
 														<th> Gender</th>
 														<th> Intake Type </th>
+														<th> Calling Visa Date </th>
+														<th> Calling Visa Batch </th>
 														<th> Agency Registered </th>
-														<th> Note </th>
 														<th> Employee Assigned </th>
 														<th> Approval Status </th>
+														<th> Note </th>
 													</tr>
 												</thead>
 												<tbody>
@@ -101,16 +102,19 @@ include "empHeader.php";
 																echo	"<td>". $i ."</td>";
 																echo 	"<td>".$row["fw_name"]."</td>";
 																echo 	"<td>". $row["fw_nation"] ."</td>";
+																echo 	"<td>". $row["fw_year"] ."</td>";
 																echo 	"<td>". $row["fw_phone"] ."</td>";
 																echo 	"<td>". $row["fw_phone2"] ."</td>";
 																echo 	"<td>". $row["fw_phone3"] ."</td>";
 																echo 	"<td>". $row["fw_address"] ."</td>";
 																echo 	"<td>". $row["fw_gender"] ."</td>";
 																echo 	"<td>". $row["fw_intake"] ."</td>";
+																echo 	"<td>". $row["cvDateInput"] ."</td>";
+																echo 	"<td>". $row["cvBatchInput"] ."</td>";
 																echo 	"<td>". $row["fw_register"] ."</td>";
-																echo 	"<td>". $row["fw_remarks"] ."</td>";
 																echo 	"<td>". $row["emp_assigned"] ."</td>";
 																echo 	"<td>". $row["fw_status"] ."</td>";
+																echo 	"<td>". $row["fw_remarks"] ."</td>";
 																// echo 	"<td>
                                                                 // <a href='adminUpdateEmp.php?emp_ic=" . $row["emp_ic"] . "' ><button type='button' class='btn btn-warning'>Update</button></a>  
 																// <br><br>
@@ -119,11 +123,7 @@ include "empHeader.php";
 																echo "</tr>";
 															}
 														}
-														else{
-															echo "<tr>";
-															echo	"<td colspan='5'>No Result</td>";
-															echo "</tr>";
-														}
+														
 														mysqli_close($con);
 														?>
 												</tbody>

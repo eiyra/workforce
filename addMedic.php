@@ -1,48 +1,30 @@
-<form name="form1" method="post" action="addMedic.php">
-
 <?php
-include ('config.php');
+include('config.php');
 
-$fw_id = $_POST["fw_id"];
-$medicalNo = $_POST["medicalNo"];
-$medicalDate = $_POST["medicalDate"];
-$immDate = $_POST["immDate"];
-$medicalStatus = $_POST["medicalStatus"];
-$medicNote = $_POST["medicNote"];
-$medicEmpAssign = $_POST["medicEmpAssign"];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $fw_id = $_POST["fw_id"];
+    $medicalDate = $_POST["medicalDate"];
+    $immDate = $_POST["immDate"];
+    $medicalStatus = $_POST["medicalStatus"];
+    $medicNote = $_POST["medicNote"];
+    $medicEmpAssign = $_POST["medicEmpAssign"];
 
+    // Prepare and bind the statement
+    $stmt = $con->prepare("INSERT INTO medical (fw_id, medicalDate, immDate, medicalStatus, medicNote, medicEmpAssign) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $fw_id, $medicalDate, $immDate, $medicalStatus, $medicNote, $medicEmpAssign);
 
-// $sql = "SELECT * FROM fw";
-// $query = mysqli_query($con, $sql);
-// $result = mysqli_fetch_array($query,MYSQLI_ASSOC);
+    // Execute the statement
+    if ($stmt->execute()) {
+        echo "<script>alert('Successfully added!');";
+        echo "window.location.href='empViewFW.php?fw_id=" . $fw_id . "';</script>";
+    } else {
+        echo "<script>alert('Error inserting data: " . $stmt->error . "');";
+        echo "window.location.href='empViewFW.php?fw_id=" . $fw_id . "';</script>";
+    }
 
-	
-{
-	$insert = mysqli_query($con,"INSERT INTO medical (fw_id, medicalNo, medicalDate, immDate, medicalStatus, medicNote, medicEmpAssign)
-	 VALUES(
-	
-	'". $fw_id ."',
-	'". $medicalNo ."',
-	'". $medicalDate ."',
-	'". $immDate ."',
-	'". $medicalStatus ."',
-	'". $medicNote ."',
-	'". $medicEmpAssign ."'
-	) ") or (mysqli_connect_error());
-  
-
-		if($insert)
-		{
-			echo "<script>alert('Successfully added!');";
-			echo "window.location.href = 'empFWList.php';</script>";
-		}
-		else
-		{
-			echo "<script>alert('Error inserting data!');";
-			echo "window.location.href = 'empFWList.php';</script>";
-		}
+    $stmt->close();
+    $con->close();
 }
-mysqli_close($con);
 ?>
 
-</form>
+
