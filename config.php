@@ -14,7 +14,8 @@ $connectionString = "host=$host port=$port dbname=$dbname user=$user password=$p
 $db = pg_connect($connectionString);
 
 if (!$db) {
-   echo "Error : Unable to open database\n";
+   // echo "Error : Unable to open database\n";
+   echo "Error : " . pg_last_error($db);
    // die("Connection failed: " . pg_last_error());
 }
 
