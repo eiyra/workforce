@@ -1,6 +1,7 @@
-<?php require_once("config.php"); ?>
-<?php
+<?php 
+require_once("config.php"); 
 	session_start();
+	
 	if($_SESSION['admin_ic'] == "")
 	{
     echo "<script>alert('Please Login!');";
@@ -11,7 +12,10 @@
 
 	$strSQL = "SELECT * FROM admin WHERE admin_ic = '".$_SESSION['admin_ic']."' ";
 	$objQuery = mysqli_query($con,$strSQL);
-	$objResult = mysqli_fetch_array($objQuery);
+	// Check if the queries were successful before fetching data
+if ($objQuery && mysqli_num_rows($objQuery) > 0) {
+    $row = mysqli_fetch_array($objQuery);
+}
 
 ?>
 

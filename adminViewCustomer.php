@@ -10,7 +10,11 @@
 
 
 	$strSQL = "SELECT * FROM admin WHERE admin_ic = '".$_SESSION['admin_ic']."' ";
-	$objQuery = mysqli_query($con,$strSQL);
+	$objQuery = mysqli_query($con, $strSQL);
+if (!$objQuery) {
+    die('Query error: ' . mysqli_error($con));
+}
+
 	$objResult = mysqli_fetch_array($objQuery);
 
 ?>
@@ -255,7 +259,10 @@ function checkDelete(){
 
 														$sql="SELECT * FROM customer ORDER BY customer_name ASC";
 
-														$result=mysqli_query($con,$sql);
+														$result = mysqli_query($con, $sql);
+if (!$result) {
+    die('Query error: ' . mysqli_error($con));
+}
 
 														$i=0;
 														// Associative array

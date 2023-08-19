@@ -19,12 +19,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <style>
  
- body
-  {
-  background-color:#FFFFFF;
-  background-image:url("img/logo/bg.jpg");
-  background-size:cover;
-  }  
+body 
+{
+	background-color: #FFFFFF;
+    background-image: url("img/logo/bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+} 
   
 </style>
 </head>
@@ -58,43 +61,45 @@ input[type="text"],input[type="password"]
 		<!-- <h4><p href="index.html">tagline </p></h4> -->
 
 		<div class="login-bottom">
-			<h2>Login</h2>
+			<h2>User Login</h2>
 		<form action="loginrequest.php" name="frmAdd" method="post">
 			<div class="col-md-10">
 				<div class=" col-md-10 login-mail">
 					<input type="text" id="user_ic" name="user_ic" placeholder="User IC" required="">
-					<i class="fa fa-envelope"></i>
+					<i class="fa fa-user"></i>
 				</div>
 				<div class="col-md-10 login-mail">
 					<input type="password" id="password" name="password" placeholder="Password" required="">
-					<i class="fa fa-lock"></i>
-					</div>
-
-
+					<i class="fa fa-key"></i>
+				</div>
 			</div>
-
+			
+			<br><br>
+			
 			<div class="col-md-5 login-do">
 				<label class="hvr-shutter-in-horizontal login-sub">
 					<center><input type="submit" id="submit" name="submit" value="login"></center>
 				</label>
 			</div>
 
-        <!-- <div class="col-md-10"><br>
-				<h5><a href = "forgot_password1.php">Forgot Password?</a></h5> 
-			<br>
-			<h4>Not Registered?<a href = "register.php"> <font color="#E83E7B">Click here!</font></a></h4>
-        </div> 
-		 -->
-			<div class="clearfix"> </div>
-
-			</form>
+			<div class="col-md-10"><br>
+				<h5><a href = "forgot_password.php">Forgot Password?</a></h5> 
+			</div> 
+		
+		<div class="clearfix"> </div>
+		
+		</form>
+		
+		
 		</div>
+	
 	</div>
 
 
 <!--scrolling js-->
-	<script src="js/jquery.nicescroll.js"></script>
-	<script src="js/scripts.js"></script>
-	<!--//scrolling js-->
+<script src="js/jquery.nicescroll.js"></script>
+<script src="js/scripts.js"></script>
+<!--//scrolling js-->
+
 </body>
 </html>

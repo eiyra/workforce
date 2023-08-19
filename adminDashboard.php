@@ -1,6 +1,7 @@
-<?php require_once("config.php"); ?>
-<?php
+<?php 
+require_once("config.php"); 
 	session_start();
+	
 	if($_SESSION['admin_ic'] == "")
 	{
     echo "<script>alert('Please Login!');";
@@ -11,23 +12,43 @@
 
 	$strSQL = "SELECT * FROM admin WHERE admin_ic = '".$_SESSION['admin_ic']."' ";
 	$objQuery = mysqli_query($con,$strSQL);
-	$objResult = mysqli_fetch_array($objQuery);
+	// Check if the query was successful
+if ($objQuery) {
+    $objResult = mysqli_fetch_array($objQuery);
+} else {
+    // Handle query error
+    echo "Query failed: " . mysqli_error($con);
+    exit();
+}
+
 
 	$sql="SELECT COUNT(emp_gender)as a from employee where emp_gender='male'";
 	$result=mysqli_query($con,$sql);
-	$row=mysqli_fetch_array($result);
+	// Check if the queries were successful before fetching data
+if ($result && mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_array($result);
+}
 
 	$sql1="SELECT COUNT(emp_gender)as b from employee where emp_gender='female'";
 	$result1=mysqli_query($con,$sql1);
-	$row1=mysqli_fetch_array($result1);
+	// Check if the queries were successful before fetching data
+if ($result1 && mysqli_num_rows($result1) > 0) {
+    $row1 = mysqli_fetch_array($result1);
+}
 
 	$sql2="SELECT COUNT(mua_gender)as c from makeupartist where mua_gender='male'";
 	$result2=mysqli_query($con,$sql2);
-	$row2=mysqli_fetch_array($result2);
+	// Check if the queries were successful before fetching data
+if ($result2 && mysqli_num_rows($result2) > 0) {
+    $row2 = mysqli_fetch_array($result2);
+}
 
 	$sql3="SELECT COUNT(mua_gender)as d from makeupartist where mua_gender='female'";
 	$result3=mysqli_query($con,$sql3);
-	$row3=mysqli_fetch_array($result3);
+	// Check if the queries were successful before fetching data
+if ($result3 && mysqli_num_rows($result3) > 0) {
+    $row3 = mysqli_fetch_array($result3);
+}
 ?>
 <!DOCTYPE HTML>
 <html>

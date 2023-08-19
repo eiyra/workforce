@@ -21,20 +21,77 @@ include "empHeader.php";
 
 			<div id="page-wrapper" class="gray-bg dashbard-1">
 				<div class="content-main">
+					
+				<div align='center'>
+				<div class="col-md-6 ">
+				<div class="content-top-1">
+				<div class="col-md-12 top-content">
+				
+				<center>
+				
+				<?php
 
-					<!--banner-->
-					<div class="banner">
-					<h4>
-					<span>List of 'Pending' Foreign Workers</span>
-					</h4>
-					</div>
+							$sql="SELECT count(passExpDate) as passExpDate FROM passport WHERE passExpDate BETWEEN date_sub(now(), interval 0 day) AND date_add(now(), interval 18 month)";
+							$query=mysqli_query($con,$sql);
+							$resultData=mysqli_fetch_assoc($query);
 
-          <div class="content-top">
-			<div class="clearfix"> </div>
-		  </div>
+				?>
+				
+				<label> <?php echo $resultData['passExpDate']; ?></label>
+				<h5><p><a href="empPassReport.php">Passport Expires within 18 months</a></p></h5>
+				
+				</center>
+				</div>
+				
+				<div class="clearfix"> </div>
+				
+				</div>
+				</div>
+				</div>
+				
+				<div align='center'>
+				<div class="col-md-6 ">
+				<div class="content-top-1">
+				<div class="col-md-12 top-content">
+				
+				<center>
+				
+				<?php
+				$sql2 = "SELECT count(permitExpDate) as permitExpDate FROM permit WHERE permitExpDate BETWEEN date_sub(now(), interval 0 day) AND date_add(now(), interval 3 month)";
+				$query2 = mysqli_query($con, $sql2);
+				
+				if ($query2) {
+					$resultData2 = mysqli_fetch_assoc($query2);
+					echo "<label>" . $resultData2['permitExpDate'] . "</label>";
+				} else {
+					echo "<label>Error fetching data</label>";
+				}
+				?>
+
+				<h5><p><a href="empPermitReport.php">Permit Expires within 3 months</a></p></h5>
+				
+				</center>
+				</div>
+				
+				<div class="clearfix"> </div>
+				
+				</div>
+				</div>
+				</div>
+
+
+				<div class="clearfix"></div>
+					
+
+				<div class="content-top">
+				
+				<div class="banner">
+				<h4><span>List of 'PENDING' Foreign Workers :</span></h4>
+				</div>
+
+				</div>
 
 					<div class="content-mid">
-
 						<br>
 								<div class='panel panel-primary'>
 									<div class='panel-body'>

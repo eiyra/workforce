@@ -115,10 +115,17 @@
 			  border-top: none;
 			}
 			
-			/* div.container {
-			width: 100%;
-			} */
-			
+			/* Add this CSS in your stylesheet */
+			.center {
+			text-align: center;
+			}
+
+			.btn-responsive {
+				display: inline-block;
+				margin: 5px;
+				/* Additional styles as needed */
+			}
+		
 		</style>
 	</head>
 	

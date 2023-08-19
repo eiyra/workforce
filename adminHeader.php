@@ -84,10 +84,10 @@
 					<div class="drop-men" >
 						<ul class=" nav_1">
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span class=" name-caret"><?php echo $objResult['admin_name']; ?><i class="caret"></i></span>
-								<?php if($objResult['admin_image'] == null) { ?>
+								<a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span class=" name-caret"><?php echo $row['admin_name']; ?><i class="caret"></i></span>
+								<?php if($row['admin_image'] == null) { ?>
                       <img width="40" height="40" src="img/default.png">
-						<?php } else { ?><img width="40" height="40" src="img/<?php echo $objResult['admin_image']; ?>"> <?php } ?></a>
+						<?php } else { ?><img width="40" height="40" src="img/<?php echo $row['admin_image']; ?>"> <?php } ?></a>
 								<ul class="dropdown-menu " role="menu">
 									<li><a href="adminProfile.php"><i class="fa fa-user"></i>Edit Profile</a></li>
 										<li><a href="adminChangePassword.php"><i class="fa fa-key"></i>Change Password</a></li>

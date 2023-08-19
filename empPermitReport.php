@@ -27,7 +27,7 @@ include "empHeader.php";
 						<h2>
 							<a href="empReport.php">Report</a>
 							<i class="fa fa-angle-right"></i>
-							<span>Permit Report</span>
+							<a href="empPermitReport.php">Permit Report</a>
 						</h2>
 					</div>
 					
@@ -39,10 +39,9 @@ include "empHeader.php";
 							<div class="table-responsive">
 							
 							
-							<form class="form-inline" method="POST">
+							<form class="form-inline" method="GET">
 							<div class="form-group">
 							<i class="fa fa-search nav_icon "></i>
-							<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>SEARCH :</label>  -->
 							<select class="form-control" name="status" required>
 							<option value=""></option>
 							<option value="3MONTHS">Permit Expires Within 3 Months</option>
@@ -58,19 +57,22 @@ include "empHeader.php";
 							<?php
 							include 'config.php';
 
-							if (isset($_POST['searchStatus'])) {
-								if ($_POST['status']) {
-									$status = $_POST['status'];
-								}
+							// Fetch all data from the table initially
+							$query = "SELECT * FROM permit NATURAL JOIN fw ORDER BY fw_name ASC";
+							$result = mysqli_query($con, $query) or die(mysqli_error());
+							$i = 0;
 
-								$query = "";
+							// Check if the filter value is present in the URL
+							if (isset($_GET['status'])) {
+								$status = $_GET['status'];
 
+								// Generate the appropriate query based on the selected filter value
 								if ($status == '3MONTHS') {
 									$query = "SELECT * FROM permit NATURAL JOIN fw WHERE permitExpDate BETWEEN date_sub(now(), interval 0 day) AND date_add(now(), interval 3 month) ORDER BY fw_name ASC";
-								}
+								} 
 
 								$result = mysqli_query($con, $query) or die(mysqli_error());
-								$i = 0;
+							}
 
 								echo "<div class='panel panel-primary'>";
 								echo "<div class='panel-body'>";
@@ -89,7 +91,10 @@ include "empHeader.php";
 								echo "<th>Calling Visa Batch</th>";
 								echo "<th>Agency Registered</th>";
 								echo "<th>Permit Number</th>";
+								echo "<th>Permit Issued Date</th>";
 								echo "<th>Permit Expiry Date</th>";
+								echo "<th>Permit Taken Date</th>";
+								echo "<th>Permit Taken Method</th>";
 								echo "<th>Remarks</th>";
 								echo "</tr>";
 								echo "</thead>";
@@ -110,7 +115,10 @@ include "empHeader.php";
 								$cvBatchInput = $row["cvBatchInput"];
 								$fw_register = $row["fw_register"];
 								$permitNo = $row["permitNo"];
+								$permitIssuedDate = $row["permitIssuedDate"];
 								$permitExpDate = $row["permitExpDate"];
+								$permitTakenDate = $row["permitTakenDate"];
+								$permitMethod = $row["permitMethod"];
 								$permitNote = $row["permitNote"];
 
 								$i++;
@@ -128,18 +136,20 @@ include "empHeader.php";
 								echo "<td>" . $cvBatchInput . "</td>";
 								echo "<td>" . $fw_register . "</td>";
 								echo "<td>" . $permitNo . "</td>";
+								echo "<td>" . $permitIssuedDate . "</td>";
 								echo "<td>" . $permitExpDate . "</td>";
+								echo "<td>" . $permitTakenDate . "</td>";
+								echo "<td>" . $permitMethod . "</td>";
 								echo "<td>" . $permitNote . "</td>";
 								echo "</tr>";
 								}
 								}
-								
 
 								echo "</tbody>";
 								echo "</table>";
 								echo "</div>";
 								echo "</div>";
-							}
+							
 							?>
 
 			
@@ -168,8 +178,8 @@ include "empHeader.php";
 			<script src="js/jquery.nicescroll.js"></script>
 			<script src="js/scripts.js"></script>
 			<!--//scrolling js-->
-			
 				
+
 <?php
 include "empFooter.php";                
 ?>

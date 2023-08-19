@@ -40,15 +40,14 @@ include "empHeader.php";
 						<div class="grid-hor">
 							
 						<div class="center">
-						
-						<a href="empPassReport.php"><button type="button" class="btn btn-primary">Passport Report</button></a>
-						<a href="empPermitReport.php"><button type="button" class="btn btn-primary">Permit Report</button></a>
-						<a href="empMedicalReport.php"><button type="button" class="btn btn-primary">Medical Report</button></a>
-						<a href="empFingerReport.php"><button type="button" class="btn btn-primary">Fingerprint Report</button></a>
-						<a href="empMajikanReport.php"><button type="button" class="btn btn-primary">Employer Details Report</button></a>
-						<a href="empPaymentReport.php"><button type="button" class="btn btn-primary">Payment Report</button></a>
-						
+						<a href="empPassReport.php" class="btn btn-primary btn-responsive">Passport Report</a>
+						<a href="empPermitReport.php" class="btn btn-primary btn-responsive">Permit Report</a>
+						<a href="empMedicalReport.php" class="btn btn-primary btn-responsive">Medical Report</a>
+						<a href="empFingerReport.php" class="btn btn-primary btn-responsive">Fingerprint Report</a>
+						<a href="empMajikanReport.php" class="btn btn-primary btn-responsive">Employer Details Report</a>
+						<a href="empPaymentReport.php" class="btn btn-primary btn-responsive">Payment Report</a>
 						</div>
+
 						
 						<br><br>
 						
