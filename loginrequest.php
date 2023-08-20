@@ -26,22 +26,22 @@ if (isset($_POST['submit'])) {
       header('Location: adminDashboard.php');
       exit;
    }
-   
+
    // If no matching role is found
    echo "<script>alert('Login Failed! Wrong IC or Password!');
          window.location.href = 'index.php';</script>";
    exit;
 
-//   // $id = $row['adm_ic'];
+   //   // $id = $row['adm_ic'];
 //   $id2 = $row2['emp_ic'];
 //   $idad = $rows['admin_ic'];
 
-//   // if($id==$username) {
+   //   // if($id==$username) {
 //   // $_SESSION['ad_ic'] = $id;
 //   // header('Location:admDashboard.php');
 //   // }
 
-//   if ($id2 == $username) {
+   //   if ($id2 == $username) {
 //       $_SESSION['emp_ic'] = $row2['emp_ic'];
 //       header('Location: empDashboard.php');
 //       exit; // Important: Exit after sending header

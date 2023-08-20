@@ -1,4 +1,8 @@
-<!DOCTYPE HTML>
+<?php
+include 'inc/header.php';
+?>
+
+<!-- <!DOCTYPE HTML>
 <html>
 <head>
 <title>Workforce Management System</title>
@@ -9,97 +13,128 @@
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-<!-- Custom Theme files -->
 <link href="css/style.css" rel='stylesheet' type='text/css' />
 <link href="css/font-awesome.css" rel="stylesheet">
 <script src="js/jquery.min.js"> </script>
 <script src="js/bootstrap.min.js"> </script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-<style>
- 
-body 
-{
-	background-color: #FFFFFF;
-    background-image: url("img/logo/bg.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-} 
-  
-</style>
-</head>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 
 <script>
-  $( function() {
-    $( "#dialog-message" ).dialog({
-      modal: true,
-      buttons: {
-        Ok: function() {
-          $( this ).dialog("close");
-        }
-      }
-    });
-  } );
-  </script>
+	$(function () {
+		$("#dialog-message").dialog({
+			modal: true,
+			buttons: {
+				Ok: function () {
+					$(this).dialog("close");
+				}
+			}
+		});
+	});
+</script>
 
 <style>
-#box { height:380px; }
-input[type="text"],input[type="password"]
-{
-	height:60px;
-	border: 2px solid #e0ebeb;
-}
+	.forgot {
+		text-decoration: none;
+		display: inline-block;
+		color: black;
+	}
+
+	.btnSubmit {
+		width: 50%;
+		border: none;
+		border-radius: 1rem;
+		padding: 1.5%;
+		cursor: pointer;
+	}
+
+	.login-form .btnSubmit {
+		font-weight: 600;
+		color: #FFFF;
+		background-color: #4B9EFF;
+	}
+
+	.hidden {
+		display: none;
+	}
+
+	body .icField #ic {
+		position: absolute;
+		right: 33px;
+		top: 37.5%;
+		transform: translateY(-50%);
+	}
+
+	body .passwordField #PasswordToggler {
+		position: absolute;
+		right: 30px;
+		top: 58.7%;
+		transform: translateY(-50%);
+		cursor: pointer;
+	}
 </style>
 
 <body>
-
-	<div class="login">
-    	   <h1><font color="#FFFFFF">Workforce Management System</font></h1><br>
-		<!-- <h4><p href="index.html">tagline </p></h4> -->
-
-		<div class="login-bottom">
-			<h2>User Login</h2>
-		<form action="loginrequest.php" name="frmAdd" method="post">
-			<div class="col-md-10">
-				<div class=" col-md-10 login-mail">
-					<input type="text" id="user_ic" name="user_ic" placeholder="User IC" required="">
-					<i class="fa fa-user"></i>
-				</div>
-				<div class="col-md-10 login-mail">
-					<input type="password" id="password" name="password" placeholder="Password" required="">
-					<i class="fa fa-key"></i>
-				</div>
-			</div>
-			
-			<br><br>
-			
-			<div class="col-md-5 login-do">
-				<label class="hvr-shutter-in-horizontal login-sub">
-					<center><input type="submit" id="submit" name="submit" value="login"></center>
-				</label>
-			</div>
-
-			<div class="col-md-10"><br>
-				<h5><a href = "forgot_password.php">Forgot Password?</a></h5> 
-			</div> 
-		
-		<div class="clearfix"> </div>
-		
-		</form>
-		
-		
-		</div>
-	
+	<div class="text-center mt-5 text-uppercase">
+		<h1 style="color: #FFFFFF;">Workforce Management System</h1>
 	</div>
 
+	<div class="container d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+		<div class="col-md-4">
+			<div class="card">
+				<div class="card-body login-form">
+					<h4 class="card-title text-center text-uppercase mb-5">User Login</h4>
 
-<!--scrolling js-->
-<script src="js/jquery.nicescroll.js"></script>
-<script src="js/scripts.js"></script>
-<!--//scrolling js-->
+					<form action="loginrequest.php" method="post">
+						<div class="form-group">
+							<div class="icField">
+								<label for="userIc">User IC:</label>
+								<input type="text" id="user_ic" name="user_ic" class="form-control"
+									placeholder="Enter IC Number" required />
+								<span><i id="ic" class="fa fa-user"></i></span>
+							</div>
+						</div>
 
+						<div class="form-group mt-3">
+							<div class="passwordField">
+								<label for="passwordField">Password:</label>
+								<input type="password" id="password" name="password" class="form-control"
+									placeholder="Enter Password" required />
+								<span><i id="PasswordToggler" class="fa-solid fa-eye"
+										onclick="togglePasswordVisibility('password', this)"></i></span>
+							</div>
+						</div>
+
+						<div class="form-group text-center mt-5">
+							<input type="submit" id="submit" class="btnSubmit" name="submit" value="Login">
+						</div>
+
+						<div class="form-group text-center mt-2">
+							<a href="forgot_password.php" class="forgot" style="font-size: 13px; color: blue;">
+								Forgot Password?
+							</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function togglePasswordVisibility(inputId, iconElement) {
+			const passwordInput = document.getElementById(inputId);
+
+			if (passwordInput.type === "password") {
+				passwordInput.type = "text";
+				iconElement.classList.remove("fa-eye");
+				iconElement.classList.add("fa-eye-slash");
+			} else {
+				passwordInput.type = "password";
+				iconElement.classList.remove("fa-eye-slash");
+				iconElement.classList.add("fa-eye");
+			}
+		}
+	</script>
 </body>
+
 </html>

@@ -1,158 +1,123 @@
 <?php
-include('config.php');
-
-if (isset($_GET['token'])) {
-    $token = $_GET['token'];
-
-    $userType = '';
-    $userId = '';
-
-    // Retrieve user information based on token
-    $getUserQuery = "SELECT 'admin' AS user_type, admin_ic AS user_id FROM admin WHERE reset_token = ? AND token_expiry > NOW() 
-                     UNION
-                     SELECT 'adm' AS user_type, adm AS user_id FROM adm WHERE reset_token = ? AND token_expiry > NOW() 
-                     UNION
-                     SELECT 'employee' AS user_type, emp_ic AS user_id FROM employee WHERE reset_token = ? AND token_expiry > NOW()";
-
-    $stmt = mysqli_prepare($con, $getUserQuery);
-    mysqli_stmt_bind_param($stmt, "sss", $token, $token, $token);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_bind_result($stmt, $userType, $userId);
-    mysqli_stmt_fetch($stmt);
-    mysqli_stmt_close($stmt);
-
-    if ($userType && $userId) {
-        // Process password reset for the appropriate user table
-        if ($userType === 'admin') {
-            // Update admin's password and clear/reset token
-            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-            $updateAdminPasswordQuery = "UPDATE admin SET admin_password = ?, reset_token = NULL, token_expiry = NULL WHERE admin_ic = ?";
-            $stmt = mysqli_prepare($con, $updateAdminPasswordQuery);
-            mysqli_stmt_bind_param($stmt, "ss", $hashedPassword, $userId);
-            mysqli_stmt_execute($stmt);
-        } elseif ($userType === 'adm') {
-            // Update adm's password and clear/reset token
-            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-            $updateAdmPasswordQuery = "UPDATE adm SET adm_password = ?, reset_token = NULL, token_expiry = NULL WHERE adm = ?";
-            $stmt2 = mysqli_prepare($con, $updateAdmPasswordQuery);
-            mysqli_stmt_bind_param($stmt2, "ss", $hashedPassword, $userId);
-            mysqli_stmt_execute($stmt2);
-        } elseif ($userType === 'employee') {
-            // Update employee's password and clear/reset token
-            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-            $updateEmployeePasswordQuery = "UPDATE employee SET emp_password = ?, reset_token = NULL, token_expiry = NULL WHERE emp_ic = ?";
-            $stmt3 = mysqli_prepare($con, $updateEmployeePasswordQuery);
-            mysqli_stmt_bind_param($stmt3, "ss", $hashedPassword, $userId);
-            mysqli_stmt_execute($stmt3);
-        }
-
-        echo "Password reset successful.";
-    } else {
-        echo "Invalid or expired token.";
-    }
-}
-
-mysqli_close($con);
+include "inc/header.php";
 ?>
-
-<!-- Your HTML and form code here -->
-
-
-<!DOCTYPE html>
-<html>
-<head>
-<title>Workforce Management System</title>
-<link rel="shortcut icon" href="img/logo/workforce.png" type="image/x-icon"/>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Minimal Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-<!-- Custom Theme files -->
-<link href="css/style.css" rel='stylesheet' type='text/css' />
-<link href="css/font-awesome.css" rel="stylesheet">
-<script src="js/jquery.min.js"> </script>
-<script src="js/bootstrap.min.js"> </script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="js/user.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 <style>
- 
-body 
-{
-	background-color: #FFFFFF;
-    background-image: url("img/logo/bg.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-} 
-  
+  .back-to-login {
+    text-decoration: none;
+    display: inline-block;
+    color: black;
+  }
+
+  .btnSubmit {
+    width: 50%;
+    border: none;
+    border-radius: 1rem;
+    padding: 1.5%;
+    cursor: pointer;
+  }
+
+  .reset-form .btnSubmit {
+    font-weight: 600;
+    color: #FFFF;
+    background-color: #4B9EFF;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  body .password-field {
+    position: relative;
+  }
+
+  body .password-field input {
+    width: 21.2rem;
+    height: 3em;
+    padding: 1em;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.2);
+    font-size: 15px;
+    letter-spacing: 0.5px;
+  }
+
+  body .password-field input::placeholder {
+    color: #a9a9a9;
+  }
+
+  body .password-field #newPasswordToggler {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  body .password-field #confirmPasswordToggler {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
 </style>
-    
-</head>
-
-<script>
-  $( function() {
-    $( "#dialog-message" ).dialog({
-      modal: true,
-      buttons: {
-        Ok: function() {
-          $( this ).dialog("close");
-        }
-      }
-    });
-  } );
-  </script>
-
-<style>
-#box { height:380px; }
-input[type="text"],input[type="password"]
-{
-	height:60px;
-	border: 2px solid #e0ebeb;
-}
-</style>
-
-
 
 <body>
+  <div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body reset-form">
+          <h4 class="card-title text-center text-uppercase mb-5">Reset Password</h4>
+          <?php if (!empty($_GET['authtoken']) && $_GET['authtoken']) { ?>
+            <form id="savePasswordForm" method="POST">
+              <div id="errorMessge" class="alert hidden"></div>
+              <div class="form-group">
+                <div class="password-field">
+                  <input type="password" id="newPassword" name="newPassword" placeholder="New Password" required />
+                  <span><i id="newPasswordToggler" class="fa-solid fa-eye"
+                      onclick="togglePasswordVisibility('newPassword', this)"></i></span>
+                </div>
+              </div>
 
-	<div class="login">
-    	   <h1><font color="#FFFFFF">Workforce Management System</font></h1><br>
-		<!-- <h4><p href="index.html">tagline </p></h4> -->
+              <div class="form-group mt-3">
+                <div class="password-field">
+                  <input type="password" id="confirmNewPassword" name="confirmNewPassword" placeholder="Confirm Password"
+                    required />
+                  <span><i id="confirmPasswordToggler" class="fa-solid fa-eye"
+                      onclick="togglePasswordVisibility('confirmNewPassword', this)"></i></span>
+                </div>
+              </div>
 
-		<div class="login-bottom">
-			<h2>Reset Password</h2>
-		<form action="" name="frmAdd" method="POST">
-		
-		<div class="col-md-10">
-			<div class="col-md-10 login-mail">
-			<label for="new_password">New Password:</label>
-			<input type="password" id="new_password" name="new_password" required><br>
-			<label for="confirm_password">Confirm Password:</label>
-			<input type="password" id="confirm_password" name="confirm_password" required><br>
-			</div>
-			<button type="submit" name="submit">Reset Password</button>
-		</div>
-			
-		
-		<div class="clearfix"> </div>
-		
-		</form>
-		
-		
-		</div>
-	
-	</div>
+              <div class="form-group text-center mt-5 mb-3">
+                <input type="hidden" name="action" value="savePassword" />
+                <input type="hidden" name="authtoken" value="<?php echo $_GET['authtoken']; ?>" />
+                <input type="submit" class="btnSubmit" value="Reset Password" />
+              </div>
+            </form>
+          <?php } ?>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <script>
+    function togglePasswordVisibility(inputId, iconElement) {
+      const passwordInput = document.getElementById(inputId);
 
-
-<!--scrolling js-->
-<script src="js/jquery.nicescroll.js"></script>
-<script src="js/scripts.js"></script>
-<!--//scrolling js-->
-
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        iconElement.classList.remove("fa-eye");
+        iconElement.classList.add("fa-eye-slash");
+      } else {
+        passwordInput.type = "password";
+        iconElement.classList.remove("fa-eye-slash");
+        iconElement.classList.add("fa-eye");
+      }
+    }
+  </script>
 </body>
+
 </html>
